@@ -4,7 +4,7 @@
 
 ## Turing family-only
 
-Pages with explicit generic Turing evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic Turing evidence but no supported exact SM in that family.
 
 | Page | Path |
 |------|------|
@@ -15,7 +15,7 @@ Pages with explicit generic Turing evidence but no supported exact SM in that fa
 
 ## Ampere family-only
 
-Pages with explicit generic Ampere evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic Ampere evidence but no supported exact SM in that family.
 
 | Page | Path |
 |------|------|
@@ -33,7 +33,7 @@ Pages with explicit generic Ampere evidence but no supported exact SM in that fa
 
 ## Ada family-only
 
-Pages with explicit generic Ada evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic Ada evidence but no supported exact SM in that family.
 
 | Page | Path |
 |------|------|
@@ -41,7 +41,7 @@ Pages with explicit generic Ada evidence but no supported exact SM in that famil
 
 ## Hopper family-only
 
-Pages with explicit generic Hopper evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic Hopper evidence but no supported exact SM in that family.
 
 | Page | Path |
 |------|------|
@@ -85,7 +85,7 @@ Pages with explicit generic Hopper evidence but no supported exact SM in that fa
 
 ## Blackwell family-only
 
-Pages with explicit generic Blackwell evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic Blackwell evidence but no supported exact SM in that family.
 
 | Page | Path |
 |------|------|
@@ -137,7 +137,7 @@ Pages with explicit generic Blackwell evidence but no supported exact SM in that
 
 ## CDNA2 family-only
 
-Pages with explicit generic CDNA2 evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic CDNA2 evidence but no supported exact SM in that family. On the AMD lane, read "exact SM" as "exact gfx target".
 
 | Page | Path |
 |------|------|
@@ -145,7 +145,7 @@ Pages with explicit generic CDNA2 evidence but no supported exact SM in that fam
 
 ## CDNA3 family-only
 
-Pages with explicit generic CDNA3 evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic CDNA3 evidence but no supported exact SM in that family. On the AMD lane, read "exact SM" as "exact gfx target".
 
 | Page | Path |
 |------|------|
@@ -168,7 +168,7 @@ Pages with explicit generic CDNA3 evidence but no supported exact SM in that fam
 
 ## CDNA4 family-only
 
-Pages with explicit generic CDNA4 evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic CDNA4 evidence but no supported exact SM in that family. On the AMD lane, read "exact SM" as "exact gfx target".
 
 | Page | Path |
 |------|------|
@@ -195,7 +195,7 @@ Pages with explicit generic CDNA4 evidence but no supported exact SM in that fam
 
 ## RDNA3 family-only
 
-Pages with explicit generic RDNA3 evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic RDNA3 evidence but no supported exact SM in that family. On the AMD lane, read "exact SM" as "exact gfx target".
 
 | Page | Path |
 |------|------|
@@ -205,7 +205,7 @@ Pages with explicit generic RDNA3 evidence but no supported exact SM in that fam
 
 ## RDNA4 family-only
 
-Pages with explicit generic RDNA4 evidence but no supported exact SM in that family. On the AMD lane the same rule reads as no supported exact gfx target in that family.
+Pages with explicit generic RDNA4 evidence but no supported exact SM in that family. On the AMD lane, read "exact SM" as "exact gfx target".
 
 | Page | Path |
 |------|------|

@@ -385,11 +385,16 @@ def generate_by_architecture(pages):
     ]
     for family in ARCHITECTURE_FAMILY_PREFIXES:
         label = ARCHITECTURE_FAMILY_LABELS.get(family, family.title())
+        # "exact SM" is NVIDIA nomenclature; on the AMD lane the exact targets
+        # are gfx processors. Append rather than rewrite, so the NVIDIA prose
+        # stays byte-identical.
+        caption = f"Pages with explicit generic {label} evidence but no supported exact SM in that family."
+        if family in ARCHITECTURE_FAMILY_LABELS:
+            caption += " On the AMD lane, read \"exact SM\" as \"exact gfx target\"."
         lines.extend([
             f"## {label} family-only",
             "",
-            f"Pages with explicit generic {label} evidence but no supported exact SM in that family. "
-            "On the AMD lane the same rule reads as no supported exact gfx target in that family.",
+            caption,
             "",
         ])
         _architecture_page_table(lines, family_only.get(family, []))
