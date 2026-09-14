@@ -4,9 +4,9 @@ title: "Not Reaching Peak FLOPS"
 type: pattern
 tags: [tcgen05, 2sm-cooperative, pipeline-stages, warp-specialization]
 symptoms: [compute-bound, low-tensor-core-utilization, pipeline-stalls]
-candidate_techniques: [hw-2sm-cooperative, technique-pipeline-stages, technique-warp-specialization, technique-epilogue-fusion, technique-software-exp]
+candidate_techniques: [hw-2sm-cooperative, technique-pipeline-stages, technique-warp-specialization, technique-epilogue-fusion, technique-software-exp, technique-instruction-scheduling-amd, hw-mfma-cdna]
 related: [pattern-low-sm-utilization, pattern-register-pressure]
-sources: [doc-nvidia-tuning-guide, blog-tcgen05-tutorial, blog-flash-attention-4]
+sources: [doc-nvidia-tuning-guide, blog-tcgen05-tutorial, blog-flash-attention-4, blog-rocm-fp8-gemm-cdna4, blog-rocm-mxfp4-rotation]
 ---
 
 ## Symptom
@@ -42,3 +42,24 @@ the stated attention workload, not a general instruction replacement.
 - 2-SM cooperative requires a compatible cluster launch and operand layout
 - Pipeline depth is workload- and resource-dependent
 - Software-emulated transcendentals trade accuracy for throughput
+
+## On AMD (CDNA / RDNA4)
+
+Two AMD-specific causes to rule out before reaching for scheduling.
+
+**Wrong matrix-core shape.** Larger is not better. `doc-rocm-workload-optimization`
+reports `mfma_16x16` typically beating `mfma_32x32` for GEMM on MI300X even at
+large sizes, and `blog-rocm-mxfp4-rotation` picks `v_mfma_f32_16x16x32_bf16` over
+32x32x16 because at M=1 the larger tile leaves the matrix core underutilized and
+admits fewer concurrent waves. On gfx1201 this cause does not exist — WMMA is
+16x16x16 only (`hw-wmma-rdna4`).
+
+**Lock-stepped issue.** `blog-rocm-memory-scheduling` names the mechanism: waves
+in a matmul kernel issue memory operations in sync, contend for the same
+resources, and leave the matrix core waiting. The remedy is explicit
+interleaving — `technique-instruction-scheduling-amd`.
+
+Ordering matters here. In `kernel-cdna4-fp8-gemm`'s measured ladder, scheduling
+was the *last* rung and worth 1.2x, after vectorization (11.2x), double buffering
+(2.3x), and tiling. Reaching for `sched_barrier` before the loads vectorize is a
+ten-fold misallocation of effort.

@@ -149,7 +149,22 @@ Pages with explicit generic CDNA3 evidence but no supported exact SM in that fam
 
 | Page | Path |
 |------|------|
-| _None_ | |
+| [Memory Instruction Scheduling for Lock-Stepped Kernels on AMD Instinct MI300X](../sources/blogs/rocm-memory-instruction-scheduling.md) | `sources/blogs/rocm-memory-instruction-scheduling.md` |
+| [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
+| [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
+| [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
+| [MFMA on CDNA3 and CDNA4](../wiki/hardware/mfma-cdna.md) | `wiki/hardware/mfma-cdna.md` |
+| [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
+| [Composable Kernel (CK / CK-Tile)](../wiki/languages/composable-kernel.md) | `wiki/languages/composable-kernel.md` |
+| [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
+| [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
+| [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
 
 ## CDNA4 family-only
 
@@ -157,7 +172,26 @@ Pages with explicit generic CDNA4 evidence but no supported exact SM in that fam
 
 | Page | Path |
 |------|------|
-| _None_ | |
+| [FP8 GEMM Optimization on AMD CDNA4 Architecture](../sources/blogs/rocm-fp8-gemm-cdna4.md) | `sources/blogs/rocm-fp8-gemm-cdna4.md` |
+| [Production-Ready MXFP4 Online Rotation with Fused Kernels on AMD Instinct MI355X](../sources/blogs/rocm-mxfp4-fused-rotation.md) | `sources/blogs/rocm-mxfp4-fused-rotation.md` |
+| [Occupancy Math on the AMD MI355X GPU (CDNA4): A From-First-Principles Guide](../sources/blogs/rocm-occupancy-math-mi355x.md) | `sources/blogs/rocm-occupancy-math-mi355x.md` |
+| [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
+| [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
+| [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
+| [MFMA on CDNA3 and CDNA4](../wiki/hardware/mfma-cdna.md) | `wiki/hardware/mfma-cdna.md` |
+| [FP8 GEMM on CDNA4 — the measured optimization ladder](../wiki/kernels/cdna4-fp8-gemm.md) | `wiki/kernels/cdna4-fp8-gemm.md` |
+| [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
+| [Composable Kernel (CK / CK-Tile)](../wiki/languages/composable-kernel.md) | `wiki/languages/composable-kernel.md` |
+| [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
+| [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
+| [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
+| [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
 
 ## RDNA3 family-only
 
@@ -165,7 +199,9 @@ Pages with explicit generic RDNA3 evidence but no supported exact SM in that fam
 
 | Page | Path |
 |------|------|
-| _None_ | |
+| [Using the Matrix Cores of AMD RDNA 4 architecture GPUs](../sources/docs/amd-rdna4-matrix-cores.md) | `sources/docs/amd-rdna4-matrix-cores.md` |
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [WMMA on RDNA4 (gfx12)](../wiki/hardware/wmma-rdna4.md) | `wiki/hardware/wmma-rdna4.md` |
 
 ## RDNA4 family-only
 
@@ -173,7 +209,23 @@ Pages with explicit generic RDNA4 evidence but no supported exact SM in that fam
 
 | Page | Path |
 |------|------|
-| _None_ | |
+| [rdna4-wmma-guide — WMMA lane mapping for gfx12 and a fused MXFP4 GEMM](../sources/blogs/rdna4-wmma-lane-mapping.md) | `sources/blogs/rdna4-wmma-lane-mapping.md` |
+| [Using the Matrix Cores of AMD RDNA 4 architecture GPUs](../sources/docs/amd-rdna4-matrix-cores.md) | `sources/docs/amd-rdna4-matrix-cores.md` |
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
+| [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [gfx1201 (RDNA4) as a kernel target](../wiki/hardware/gfx1201.md) | `wiki/hardware/gfx1201.md` |
+| [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
+| [WMMA on RDNA4 (gfx12)](../wiki/hardware/wmma-rdna4.md) | `wiki/hardware/wmma-rdna4.md` |
+| [Fused MXFP4 -> FP16 WMMA GEMM on gfx1201](../wiki/kernels/rdna4-wmma-gemm.md) | `wiki/kernels/rdna4-wmma-gemm.md` |
+| [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
+| [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
+| [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
+| [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
+| [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
 
 ## Architecture unknown
 
@@ -511,6 +563,95 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [add cutedsl dsv4 indexer fp8 kernel](../sources/prs/vllm/PR-42899.md) | `sources/prs/vllm/PR-42899.md` |
 
 ## Exact architectures
+
+### `gfx1100`
+
+| Page | Path |
+|------|------|
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+
+### `gfx1200`
+
+| Page | Path |
+|------|------|
+| [Using the Matrix Cores of AMD RDNA 4 architecture GPUs](../sources/docs/amd-rdna4-matrix-cores.md) | `sources/docs/amd-rdna4-matrix-cores.md` |
+| [gfx1201 (RDNA4) as a kernel target](../wiki/hardware/gfx1201.md) | `wiki/hardware/gfx1201.md` |
+| [WMMA on RDNA4 (gfx12)](../wiki/hardware/wmma-rdna4.md) | `wiki/hardware/wmma-rdna4.md` |
+| [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
+
+### `gfx1201`
+
+| Page | Path |
+|------|------|
+| [rdna4-wmma-guide — WMMA lane mapping for gfx12 and a fused MXFP4 GEMM](../sources/blogs/rdna4-wmma-lane-mapping.md) | `sources/blogs/rdna4-wmma-lane-mapping.md` |
+| [Using the Matrix Cores of AMD RDNA 4 architecture GPUs](../sources/docs/amd-rdna4-matrix-cores.md) | `sources/docs/amd-rdna4-matrix-cores.md` |
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
+| [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [gfx1201 (RDNA4) as a kernel target](../wiki/hardware/gfx1201.md) | `wiki/hardware/gfx1201.md` |
+| [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
+| [WMMA on RDNA4 (gfx12)](../wiki/hardware/wmma-rdna4.md) | `wiki/hardware/wmma-rdna4.md` |
+| [Fused MXFP4 -> FP16 WMMA GEMM on gfx1201](../wiki/kernels/rdna4-wmma-gemm.md) | `wiki/kernels/rdna4-wmma-gemm.md` |
+| [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
+| [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
+| [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
+| [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
+| [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+
+### `gfx90a`
+
+| Page | Path |
+|------|------|
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+
+### `gfx942`
+
+| Page | Path |
+|------|------|
+| [Memory Instruction Scheduling for Lock-Stepped Kernels on AMD Instinct MI300X](../sources/blogs/rocm-memory-instruction-scheduling.md) | `sources/blogs/rocm-memory-instruction-scheduling.md` |
+| [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
+| [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
+| [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
+| [MFMA on CDNA3 and CDNA4](../wiki/hardware/mfma-cdna.md) | `wiki/hardware/mfma-cdna.md` |
+| [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
+| [Composable Kernel (CK / CK-Tile)](../wiki/languages/composable-kernel.md) | `wiki/languages/composable-kernel.md` |
+| [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
+| [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
+| [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+
+### `gfx950`
+
+| Page | Path |
+|------|------|
+| [FP8 GEMM Optimization on AMD CDNA4 Architecture](../sources/blogs/rocm-fp8-gemm-cdna4.md) | `sources/blogs/rocm-fp8-gemm-cdna4.md` |
+| [Production-Ready MXFP4 Online Rotation with Fused Kernels on AMD Instinct MI355X](../sources/blogs/rocm-mxfp4-fused-rotation.md) | `sources/blogs/rocm-mxfp4-fused-rotation.md` |
+| [Occupancy Math on the AMD MI355X GPU (CDNA4): A From-First-Principles Guide](../sources/blogs/rocm-occupancy-math-mi355x.md) | `sources/blogs/rocm-occupancy-math-mi355x.md` |
+| [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
+| [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
+| [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
+| [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
+| [MFMA on CDNA3 and CDNA4](../wiki/hardware/mfma-cdna.md) | `wiki/hardware/mfma-cdna.md` |
+| [FP8 GEMM on CDNA4 — the measured optimization ladder](../wiki/kernels/cdna4-fp8-gemm.md) | `wiki/kernels/cdna4-fp8-gemm.md` |
+| [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
+| [Composable Kernel (CK / CK-Tile)](../wiki/languages/composable-kernel.md) | `wiki/languages/composable-kernel.md` |
+| [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
+| [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
+| [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
+| [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
 
 ### `sm100`
 

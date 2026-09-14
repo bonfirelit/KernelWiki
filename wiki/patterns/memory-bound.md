@@ -4,9 +4,9 @@ title: "Memory Bandwidth Bound"
 type: pattern
 tags: [vectorized-loads, cache-policy, shared-memory-optimization]
 symptoms: [memory-bound, low-compute-utilization, high-memory-throughput]
-candidate_techniques: [technique-vectorized-loads, technique-swizzling, technique-pipeline-stages]
+candidate_techniques: [technique-vectorized-loads, technique-swizzling, technique-pipeline-stages, technique-lds-bank-conflict-avoidance, hw-amd-memory-ops]
 related: [pattern-compute-bound, kernel-nvfp4-gemv]
-sources: [blog-yue-nvfp4, blog-amandeep-nvfp4, doc-nvidia-tuning-guide]
+sources: [blog-yue-nvfp4, blog-amandeep-nvfp4, doc-nvidia-tuning-guide, blog-rocm-fp8-gemm-cdna4, doc-rocm-workload-optimization]
 ---
 
 ## Symptom
@@ -44,3 +44,19 @@ the selected GPU and workload.
   nominally memory-heavy kernel. Yue Zhang's reported NVFP4 GEMV stages changed
   memory access, conversion, instruction count, and ILP together, so they do not
   establish a universal optimization order.
+
+## On AMD (CDNA / RDNA4)
+
+The AMD diagnosis starts in the ISA dump, not the profiler. Per
+`doc-rocm-workload-optimization`, confirm device loads are `global_load_dwordx4`
+and LDS traffic uses the `_b128` forms; then read the `s_waitcnt` operands —
+`vmcnt(0)` immediately before every use means the loop never pipelined, while
+non-zero counts mean loads are outstanding and being consumed in order.
+
+Vectorization is the largest single lever measured on AMD: 336.88 from 30.05
+TFLOP/s, an 11.2x step, in `kernel-cdna4-fp8-gemm`'s ladder — larger than
+adopting the matrix core itself. Do this before anything else.
+
+Then check which counter the wave is actually parked on. `vmcnt` points at HBM
+or at a missing `hw-amd-memory-ops` direct-to-LDS path (CDNA only); `lgkmcnt`
+points at LDS, and `pattern-lds-bank-conflicts` rather than this page.

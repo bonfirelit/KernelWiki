@@ -4,9 +4,9 @@ title: "Pipeline Stalls"
 type: pattern
 tags: [pipeline-stages, warp-specialization, tma, tcgen05, mbarrier]
 symptoms: [pipeline-stalls, compute-bound, low-tensor-core-utilization]
-candidate_techniques: [technique-pipeline-stages, technique-warp-specialization, technique-double-buffering, technique-ping-pong-scheduling]
+candidate_techniques: [technique-pipeline-stages, technique-warp-specialization, technique-double-buffering, technique-ping-pong-scheduling, technique-instruction-scheduling-amd, hw-amd-memory-ops]
 related: [pattern-compute-bound, pattern-tail-effect]
-sources: [blog-tcgen05-tutorial, blog-flash-attention-4, doc-nvidia-tuning-guide]
+sources: [blog-tcgen05-tutorial, blog-flash-attention-4, doc-nvidia-tuning-guide, blog-rocm-memory-scheduling, blog-rocm-fp8-gemm-cdna4]
 ---
 
 # Pipeline Stalls
@@ -66,3 +66,20 @@ Nsight Compute shows TMA or tcgen05 units idle despite nominally compute-bound w
 - Phase bugs can be intermittent; instrument stage ownership and phases during
   development.
 - A lower wait counter does not by itself mean lower end-to-end runtime.
+
+## On AMD (CDNA / RDNA4)
+
+The observable is which wait the wave is parked on. `s_waitcnt vmcnt(0)` before
+every use of a loaded value means no software pipeline: one load in flight,
+blocking. `s_waitcnt lgkmcnt(0)` dominating means LDS is the constraint — either
+bank conflicts (`pattern-lds-bank-conflicts`) or an operand staged too late.
+
+`blog-rocm-memory-scheduling` gives the correct protocol for a double-buffered
+CDNA GEMM: two `s_barrier`s per iteration, the first guaranteeing every wave has
+finished *reading* the previous K-tile before it is overwritten, the second that
+every wave finished *writing* before any wave reads. Getting this to one barrier
+is a race, not an optimization.
+
+Remedies in order of measured payoff on AMD: `technique-double-buffering` (2.3x
+in `kernel-cdna4-fp8-gemm`), then `hw-amd-memory-ops`' direct-to-LDS path (1.5x,
+CDNA only), then `technique-instruction-scheduling-amd` (1.2x).

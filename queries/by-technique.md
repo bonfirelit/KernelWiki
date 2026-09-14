@@ -10,7 +10,11 @@
 | [Epilogue fusion](../wiki/techniques/epilogue-fusion.md) | epilogue-fusion, tmem, warp-specialization | sm100, sm90 | source-reported | snippet | 2 |
 | [External Source-Map Research For Kernel Edits](../wiki/techniques/external-source-map-research.md) | cuda-cpp, cute-dsl, tma, wgmma | sm100, sm90 | source-reported | snippet | 5 |
 | [Fine-grained FP8/FP4 scaling](../wiki/techniques/fine-grained-quantization.md) | fine-grained-quantization, fp8, fp4, nvfp4 | sm100, sm90 | source-reported | snippet | 3 |
+| [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | instruction-scheduling, sched-barrier, mfma, lds | gfx942, gfx950, gfx1201, cdna3, cdna4, rdna4 | source-reported | snippet | 3 |
+| [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | in-register-transpose, wmma, ds-transpose, lds | gfx1201, gfx1200, rdna4, gfx950, cdna4 | source-reported | snippet | 3 |
 | [Kernel fusion](../wiki/techniques/kernel-fusion.md) | kernel-fusion, fused-kernel, tmem | sm100, sm90 | source-reported | snippet | 4 |
+| [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | lds-bank-conflict-avoidance, lds, swizzling, shared-memory-optimization | gfx1201, gfx942, gfx950, rdna4, cdna3, cdna4 | source-reported | snippet | 3 |
+| [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | occupancy-tuning, lds, agpr, mfma | gfx1201, gfx942, gfx950, rdna4, cdna3, cdna4 | source-reported | snippet | 2 |
 | [PTX Cache Policy Differentiation](../wiki/techniques/cache-policy.md) | cache-policy, vectorized-loads | sm100, sm90 | source-reported | snippet | 4 |
 | [Persistent Kernels with Cluster Launch Control](../wiki/techniques/persistent-kernels.md) | persistent-kernel, clc, tile-scheduling | sm100 | source-reported | snippet | 4 |
 | [Ping-Pong Scheduling](../wiki/techniques/ping-pong-scheduling.md) | ping-pong-scheduling, warp-specialization, tmem, pipeline-stages | sm100 | source-reported | snippet | 2 |
