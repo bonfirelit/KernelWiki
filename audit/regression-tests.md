@@ -10,7 +10,7 @@ body, scope, metadata, query, and provenance guards were absent.
 
 Command: `python3 -m unittest discover -s tests -p 'test_*.py'`
 
-Result: **pass — 161 tests**.
+Result: **pass — 169 tests**.
 
 Coverage includes:
 
@@ -102,6 +102,11 @@ Coverage includes:
   Hopper-only wiki page is justified, preserve source-page exemption, exercise
   every derived value adversarially, and bind all four shipped descriptions to
   the executable validator scope;
+- the mirror-image AMD-lane scope guard: wiki pages whose only AMD targets
+  predate CDNA3 require `amd_relevance`, in-lane CDNA3/CDNA4/RDNA3/RDNA4 targets
+  and pages anchored by an NVIDIA target do not, source pages stay exempt, every
+  shipped migration page justifies itself in at least one lane, and AMDGCN `asm`
+  and `hip` fences clear the snippet-reproducibility gate;
 - merged PRs require full 40-hex merge SHAs, non-merged PRs omit the field,
   and the generator both omits ephemeral test-merge objects for closed PRs and
   fails if a genuinely merged payload lacks its merge commit;

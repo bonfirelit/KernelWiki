@@ -158,6 +158,55 @@ python3 scripts/grep_wiki.py "tcgen05" --only wiki --context 0
 
 ---
 
+## Example 11: "How do I write a fast matrix kernel on my gfx1201 / RX 9070 XT?"
+
+**Navigation path**:
+1. `wiki/hardware/gfx1201.md` first — wave32, 64 KiB LDS, and the WGP-vs-CU counting trap (HIP's `multiProcessorCount` reports 32, `rocminfo` reports 64 CUs)
+2. `wiki/hardware/wmma-rdna4.md` for the matrix core. **Read the fragment layout before writing any tiling**: the lane index selects the column, not the row, so a CDNA- or CUDA-shaped assumption silently returns a transposed tile
+3. `wiki/kernels/rdna4-wmma-gemm.md` for a measured reference point (40.8 TFLOPS, 53% of FP16 WMMA theoretical)
+4. `wiki/migration/cdna-to-rdna4.md` before borrowing anything from a CDNA blog — gfx1201 has no MFMA, no AGPRs, no direct-to-LDS, and no `ds_read_tr16_b64`
+5. Optimization order from `wiki/kernels/cdna4-fp8-gemm.md`'s measured ladder: vectorize loads (11.2x) → LDS tiling → double buffering (2.3x) → scheduling (1.2x)
+
+**Command**:
+```bash
+python3 scripts/query.py --architecture gfx1201
+python3 scripts/get_page.py hw-wmma-rdna4
+```
+
+---
+
+## Example 12: "My AMD kernel is slow — where do I start?"
+
+**Navigation path**:
+1. Dump the ISA (`AMDGCN_ENABLE_DUMP=1`) and apply the four-item checklist in `wiki/languages/amdgcn-asm.md`: `global_load_dwordx4`, `_b128` LDS forms, non-zero `s_waitcnt` operands, register counts
+2. Read which counter the wave is parked on. `vmcnt` → `wiki/patterns/memory-bound.md` (`## On AMD`); `lgkmcnt` → `wiki/patterns/lds-bank-conflicts.md`
+3. Only after loads vectorize, consider `wiki/techniques/instruction-scheduling-amd.md` — it was the last rung and worth 1.2x, against vectorization's 11.2x
+4. Before tuning occupancy, read `wiki/techniques/occupancy-tuning-amd.md`: an MFMA-bound kernel held ~97% of matrix peak down to ~12% occupancy
+
+**Command**:
+```bash
+python3 scripts/query.py --symptom lds-bank-conflicts
+python3 scripts/get_page.py pattern-lds-bank-conflicts
+```
+
+---
+
+## Example 13: "Port my CUDA kernel to run on MI300X"
+
+**Navigation path**:
+1. `wiki/migration/cuda-to-hip.md` — `hipify` handles the API and nothing that matters
+2. Fix wave width **first**: `warpSize` is 64 on CDNA, and reductions or `__shfl` masks written around a literal 32 produce wrong answers, not errors
+3. `wiki/hardware/mfma-cdna.md` for the matrix-core replacement — note the shape family, and that `mfma_16x16` typically beats `mfma_32x32` for GEMM
+4. `wiki/hardware/amd-memory-ops.md` for the load path: there is no TMA, no descriptor, no `mbarrier` — it is `s_waitcnt vmcnt`/`lgkmcnt` by hand
+5. Continue to `wiki/migration/cdna-to-rdna4.md` if the real target is a consumer RDNA4 card
+
+**Command**:
+```bash
+python3 scripts/get_page.py migration-cuda-to-hip --follow-sources
+```
+
+---
+
 ## Synthesis Pattern
 
 For most questions, a high-quality answer follows this shape:
@@ -186,5 +235,8 @@ For most questions, a high-quality answer follows this shape:
 - Don't recommend techniques without citing `sources:` — the wiki exists precisely for this.
 - Don't quote performance without the full 6-field `performance_claims` record.
 - Don't conflate `sm90` and `sm100` patterns — always check the `architectures:` field.
+- Don't hand a CDNA (MI300X/MI355X) technique to someone on RDNA4 without checking the page's **"Transfers to RDNA4?"** verdict. gfx1201 has no MFMA, no AGPR file, no direct-to-LDS path, and no LDS transpose read; a large share of published AMD optimization writing does not apply to it.
+- Don't quote a `sched_group_barrier` mask value from this KB — no captured source establishes the `SchedGroupMask` table, and `wiki/techniques/instruction-scheduling-amd.md` says so explicitly. A wrong mask silently changes the schedule with no error.
+- Don't mix AMD FP8 encodings: CDNA3 is FNUZ, CDNA4 is OCP. Recompiling across them changes numerics silently.
 - Don't cite `verified` claims without checking the page actually has `evidence_basis` entries that name both an official doc and an upstream code source.
 - Don't recommend DeepEP/DualPipe/EPLB — they're explicitly out of scope (kernel-only KB).

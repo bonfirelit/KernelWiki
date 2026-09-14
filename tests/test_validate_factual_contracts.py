@@ -402,6 +402,116 @@ class SourceAttributionContractTests(unittest.TestCase):
         self.assertNotIn("5002 files of headroom", memo)
 
 
+class AmdLaneScopeContractTests(unittest.TestCase):
+    """The AMD lane's scope guard, mirroring the Blackwell-first one.
+
+    CDNA3/CDNA4 and RDNA3/RDNA4 are in scope; a wiki page whose only AMD
+    targets predate CDNA3 must say why it is kept.
+    """
+
+    @staticmethod
+    def frontmatter(path):
+        text = path.read_text(encoding="utf-8")
+        if text.startswith("---"):
+            text = text.split("---", 2)[1]
+        return validate.yaml.safe_load(text)
+
+    def test_out_of_lane_amd_pages_require_amd_relevance(self):
+        for archs in (["cdna2"], ["gfx90a"], ["cdna2", "gfx90a"]):
+            with self.subTest(architectures=archs):
+                self.assertTrue(
+                    validate.amd_relevance_errors({"architectures": archs}, "wiki-hardware")
+                )
+                self.assertEqual(
+                    [],
+                    validate.amd_relevance_errors(
+                        {"architectures": archs, "amd_relevance": "why"}, "wiki-hardware"
+                    ),
+                )
+
+    def test_in_lane_or_anchored_amd_pages_need_no_field(self):
+        in_lane = ["gfx942", "gfx950", "gfx1100", "gfx1201", "cdna3", "cdna4", "rdna3", "rdna4"]
+        for arch in in_lane:
+            with self.subTest(architecture=arch):
+                self.assertEqual(
+                    [], validate.amd_relevance_errors({"architectures": [arch]}, "wiki-hardware")
+                )
+        # An out-of-lane AMD target is fine alongside an in-lane one,
+        # or alongside any NVIDIA target (the page is anchored there).
+        self.assertEqual(
+            [], validate.amd_relevance_errors({"architectures": ["gfx90a", "gfx942"]}, "wiki-hardware")
+        )
+        self.assertEqual(
+            [], validate.amd_relevance_errors({"architectures": ["gfx90a", "sm100"]}, "wiki-hardware")
+        )
+
+    def test_source_pages_are_exempt_in_both_lanes(self):
+        fm = {"architectures": ["gfx90a"]}
+        self.assertEqual([], validate.amd_relevance_errors(fm, "source-doc"))
+        self.assertEqual([], validate.amd_relevance_errors(fm, "source-blog"))
+
+    def test_migration_pages_must_justify_one_lane(self):
+        self.assertTrue(validate.migration_relevance_errors({}, "wiki-migration"))
+        for field in ("blackwell_relevance", "amd_relevance"):
+            with self.subTest(field=field):
+                self.assertEqual(
+                    [], validate.migration_relevance_errors({field: "why"}, "wiki-migration")
+                )
+        # The rule applies to migration pages only.
+        self.assertEqual([], validate.migration_relevance_errors({}, "wiki-hardware"))
+
+    def test_shipped_migration_pages_satisfy_the_rule(self):
+        paths = sorted((ROOT / "wiki/migration").glob("*.md"))
+        self.assertTrue(paths)
+        for path in paths:
+            with self.subTest(path=path.name):
+                fm = self.frontmatter(path)
+                self.assertEqual([], validate.migration_relevance_errors(fm, "wiki-migration"))
+
+    def test_amd_code_is_recognized_as_a_compilable_snippet(self):
+        langs = validate._load_code_langs()
+        self.assertIn("hip", langs)          # via data/tags.yaml languages
+        self.assertIn("triton-rocm", langs)
+
+        amdgcn = """```asm
+v_wmma_f32_16x16x16_f16 v[0:7], v[8:11], v[12:15], v[0:7]
+s_waitcnt lgkmcnt(0)
+ds_read_b128 v[8:11], v20
+```"""
+        self.assertTrue(validate.has_compilable_code(amdgcn, langs))
+
+        hip = """```hip
+__global__ void k(float* d) {
+  int i = threadIdx.x;
+  d[i] = __builtin_amdgcn_sched_barrier(0), 1.0f;
+}
+```"""
+        self.assertTrue(validate.has_compilable_code(hip, langs))
+
+
+class AmdVocabularyContractTests(unittest.TestCase):
+    """AMD names are query vocabulary; they must not leak into PR extraction."""
+
+    def test_amd_families_and_targets_are_in_the_controlled_vocabulary(self):
+        tags = validate.yaml.safe_load(
+            (ROOT / "data/tags.yaml").read_text(encoding="utf-8")
+        )
+        architectures = set(tags["architectures"])
+        for family in ("cdna2", "cdna3", "cdna4", "rdna3", "rdna4"):
+            self.assertIn(family, architectures)
+        for target in ("gfx90a", "gfx942", "gfx950", "gfx1100", "gfx1201"):
+            self.assertIn(target, architectures)
+
+    def test_amd_product_aliases_agree_with_the_policy_mapping(self):
+        # validate_alias_contract cross-checks data/aliases.yaml against the
+        # union product map; a drifted alias must be an error.
+        self.assertEqual([], validate.validate_alias_contract())
+        self.assertTrue(
+            validate.validate_alias_contract({"gfx1201": ["MI300X"]}),
+            "an alias resolving MI300X away from gfx942 must be rejected",
+        )
+
+
 class ShippedDocumentationContractTests(unittest.TestCase):
     @staticmethod
     def frontmatter(path):
@@ -514,7 +624,7 @@ class ShippedDocumentationContractTests(unittest.TestCase):
         )
         bundles = len(list((ROOT / "artifacts").rglob("PROVENANCE.yaml")))
 
-        self.assertEqual(161, discovered_tests)
+        self.assertEqual(169, discovered_tests)
         for path in (ROOT / "audit/regression-tests.md", ROOT / "audit/validation-results.md"):
             self.assertIn(f"{discovered_tests} tests", path.read_text(encoding="utf-8"))
         for path in (

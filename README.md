@@ -1,4 +1,4 @@
-# KernelWiki — Blackwell & Hopper Kernel Optimization Knowledge Base
+# KernelWiki — GPU Kernel Optimization Knowledge Base (NVIDIA + AMD)
 > [!IMPORTANT]
 > This skill is maintained as a standalone submodule of
 > [Kernel Design Agents (KDA)](https://github.com/mit-han-lab/kernel-design-agents)
@@ -11,7 +11,11 @@
 > documentation, releases, and leaderboard snapshots were verified through
 > 2026-08-18 UTC.
 
-A structured knowledge base of NVIDIA Blackwell (SM100, B200) and Hopper (SM90, H100) GPU kernel optimization, packaged as a Claude Code skill. The repository root **is** the skill directory — clone it directly into `~/.claude/skills/` and it works out of the box.
+A structured knowledge base of GPU kernel optimization, packaged as a Claude Code skill, spanning two vendor lanes:
+
+- **NVIDIA** — Blackwell (SM100, B200) and Hopper (SM90, H100). The original and deeper lane, including a 944-page audited upstream PR corpus.
+- **AMD** — CDNA3/CDNA4 (MI300X, MI355X) and RDNA3/RDNA4 (gfx1100, gfx1201). RDNA4-first; docs, blogs, and wiki pages, with no PR corpus yet.
+ The repository root **is** the skill directory — clone it directly into `~/.claude/skills/` and it works out of the box.
 
 ## Install as a Claude Code Skill
 
@@ -33,6 +37,8 @@ Smoke test:
 cd ~/.claude/skills/KernelWiki
 python3 scripts/query.py --tag nvfp4 --type kernel --compact
 python3 scripts/get_page.py kernel-flash-attention-4 --frontmatter-only
+python3 scripts/query.py --architecture rdna4 --compact
+python3 scripts/get_page.py hw-wmma-rdna4 --frontmatter-only
 ```
 
 Optional override for relocating the scripts:
@@ -125,15 +131,17 @@ These commands also work without PyYAML. Installing `requirements.txt` is option
 - 0 broken links across all internal references
 - All `verified` wiki pages have official-doc + upstream-code evidence (enforced by `evidence_basis` field)
 - All technique/kernel/language pages have compilable code snippets (`reproducibility >= snippet`)
-- All Hopper-only wiki pages explain their `blackwell_relevance`; source pages preserve upstream evidence and are exempt
+- All Hopper-only wiki pages explain their `blackwell_relevance`, and pre-CDNA3-only AMD wiki pages explain their `amd_relevance`; source pages preserve upstream evidence and are exempt in both lanes
+- Every CDNA wiki page states whether its content transfers to RDNA4
 - Version-sensitive claims (currently Triton 3.6) carry `version_sensitive: <id>` pointers resolving to the central registry
 
 ## Scope Rules
 
-- **Blackwell-first** — SM100 content is primary. Hopper-only wiki pages require an explicit `blackwell_relevance` field; source pages are exempt.
+- **NVIDIA lane is Blackwell-first** — SM100 content is primary. Hopper-only wiki pages require an explicit `blackwell_relevance` field; source pages are exempt.
+- **AMD lane is CDNA3/CDNA4 + RDNA3/RDNA4-first**, with RDNA4 (gfx1201) as the depth target. Wiki pages whose only AMD targets predate CDNA3 require an explicit `amd_relevance` field; source pages are exempt. Every CDNA page states whether its content transfers to RDNA4.
 - **Kernel-only** — No distributed-system topics (DeepEP, DualPipe, EPLB are out of scope).
 - **English canonical** — All content in English.
-- **First-class DSLs** — CuTe DSL, CUDA C++, PTX, Triton. TileLang / cuTile / JAX-Pallas mentioned but no dedicated guides.
+- **First-class DSLs** — CuTe DSL, CUDA C++, PTX, Triton (NVIDIA); HIP C++, Triton-on-ROCm, AMDGCN assembly, Composable Kernel (AMD). TileLang / cuTile / JAX-Pallas mentioned but no dedicated guides.
 
 ## Repository Layout
 

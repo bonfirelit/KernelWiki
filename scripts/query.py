@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _wiki_root import WIKI_ROOT  # noqa: E402
 from pr_policy import (  # noqa: E402
     ARCHITECTURE_FAMILY_PREFIXES,
+    QUERY_PRODUCT_ARCHITECTURE_MAPPINGS,
     architecture_matches_filter,
 )
 
@@ -348,10 +349,27 @@ def main():
 
     if architecture_stats is not None:
         family_only, unknown = architecture_stats
+        # Name the family the requested exact target actually belongs to, not a
+        # fixed one: suggesting `--architecture blackwell` after a gfx query
+        # sends the reader to the wrong vendor lane.
+        requested = args.architecture.lower().replace("_", "")
+        # Resolve a product name to its exact target first, exactly as
+        # architecture_matches_filter does, so `--architecture MI300X` suggests
+        # its own family rather than falling through to the default.
+        if requested in QUERY_PRODUCT_ARCHITECTURE_MAPPINGS:
+            requested = QUERY_PRODUCT_ARCHITECTURE_MAPPINGS[requested][0]
+        suggested = next(
+            (
+                family
+                for family, prefixes in ARCHITECTURE_FAMILY_PREFIXES.items()
+                if requested.startswith(prefixes)
+            ),
+            "blackwell",
+        )
         print(
             f"Exact architecture filter excluded {family_only} family-only "
             f"page(s) and {unknown} architecture-unknown page(s); use "
-            "--architecture blackwell or --architecture unknown for those broader sets.",
+            f"--architecture {suggested} or --architecture unknown for those broader sets.",
             file=sys.stderr,
         )
 

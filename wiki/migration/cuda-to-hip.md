@@ -7,7 +7,7 @@ to_arch: gfx942
 tags: [hip, wmma, mfma, lds, wave64, wave32, tma, global-load-lds]
 related: [lang-hip, lang-cuda-cpp, hw-mfma-cdna, hw-wmma-rdna4, hw-lds, hw-amd-memory-ops, migration-cdna-to-rdna4]
 sources: [doc-amd-rdna4-matrix-cores, doc-rocm-workload-optimization, doc-llvm-amdgpu-usage, blog-salykova-matrix-cores-cdna, blog-rocm-memory-scheduling]
-blackwell_relevance: "Frames the AMD lane against the Hopper/Blackwell mechanisms this wiki documents in depth --- wgmma/tcgen05, TMA, mbarrier, TMEM --- so a reader arriving from the NVIDIA lane can see which of those have counterparts and which do not."
+blackwell_relevance: "Frames the AMD lane against the Hopper/Blackwell mechanisms this wiki documents in depth (wgmma/tcgen05, TMA, mbarrier, TMEM), so a reader arriving from the NVIDIA lane can see which of those have counterparts and which do not."
 amd_relevance: "Entry point into the AMD lane for readers whose mental model is CUDA. Targets gfx942 as the CDNA landing point; migration-cdna-to-rdna4 continues to gfx1201."
 confidence: source-reported
 reproducibility: pseudocode

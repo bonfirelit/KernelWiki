@@ -9,15 +9,15 @@ Every page has a unique `id` with a type-specific prefix:
 | Type | ID Prefix | Purpose |
 |------|-----------|---------|
 | source-pr | `pr-<repo>-<N>` | A PR from a tracked repo with an evidence-backed status (942 of 944 are `merged`; two are `closed` without merge) |
-| source-doc | `doc-*` | Official NVIDIA docs, papers |
+| source-doc | `doc-*` | Official vendor docs (NVIDIA, AMD, LLVM), papers |
 | source-blog | `blog-*` | Community blog posts, tutorials |
 | source-contest | `contest-*` | Competition problems / tracks |
-| wiki-hardware | `hw-*` | Blackwell hardware feature pages |
+| wiki-hardware | `hw-*` | hardware feature pages (NVIDIA and AMD lanes) |
 | wiki-technique | `technique-*` | Optimization techniques |
 | wiki-kernel | `kernel-*` | Kernel case studies with perf claims |
 | wiki-pattern | `pattern-*` | Problem → solution diagnosis |
 | wiki-language | `lang-*` | DSL / language guides |
-| wiki-migration | `migration-*` | Hopper → Blackwell migration |
+| wiki-migration | `migration-*` | cross-architecture migration |
 
 ## Required Frontmatter by Type
 
@@ -192,6 +192,13 @@ When asking about:
 - GDN / Gated Delta Net → `gated-delta-net`
 - NSA / Native Sparse Attention → `sparse-attention`
 - WGMMA / wgmma.mma_async → `wgmma`
+- MFMA / matrix core (CDNA) → `mfma`
+- WMMA (RDNA) → `wmma`
+- LDS / Local Data Share → `lds`
+- MI300X / MI325X → architecture `gfx942`; MI355X / MI350X → `gfx950`
+- MI210 / MI250X → architecture `gfx90a`
+- RX 9070 XT / Radeon AI PRO R9700 → architecture `gfx1201`
+- CDNA3 / CDNA4 / RDNA3 / RDNA4 → architecture families `cdna3` / `cdna4` / `rdna3` / `rdna4`
 
 ## Cross-Reference Fields
 
@@ -200,6 +207,10 @@ When asking about:
 - `prerequisites`: list of wiki page IDs the reader should read first
 - `candidate_techniques` (pattern only): list of technique/hw/migration IDs that address the symptoms
 
-## Blackwell-First Scope
+## Two-Lane Scope
 
-Wiki pages with a Hopper-family value and no Blackwell-family value in `architectures` MUST include a `blackwell_relevance:` field explaining why the Hopper content is kept. The validator derives both families from the canonical exact-target policy, including controlled `a`/`f` variants and the family tokens themselves. Source pages preserve upstream evidence and are exempt. Enforced for `wiki-*` page types.
+**NVIDIA lane — Blackwell-first.** Wiki pages with a Hopper-family value and no Blackwell-family value in `architectures` MUST include a `blackwell_relevance:` field explaining why the Hopper content is kept. The validator derives both families from the canonical exact-target policy, including controlled `a`/`f` variants and the family tokens themselves. Source pages preserve upstream evidence and are exempt. Enforced for `wiki-*` page types.
+
+**AMD lane — CDNA3/CDNA4 + RDNA3/RDNA4-first.** Wiki pages whose only AMD values in `architectures` fall outside those four families (i.e. CDNA2 / `gfx90a` alone) MUST include an `amd_relevance:` field. A page that also carries NVIDIA targets is already anchored by them and is exempt. Source pages are exempt. Enforced for `wiki-*` page types by the same mechanism.
+
+**Migration pages** must carry at least one of `blackwell_relevance` or `amd_relevance`; neither is individually required, so an AMD→AMD migration page is not forced to justify itself in the NVIDIA lane.
