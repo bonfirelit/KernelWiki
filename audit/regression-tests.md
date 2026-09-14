@@ -10,7 +10,7 @@ body, scope, metadata, query, and provenance guards were absent.
 
 Command: `python3 -m unittest discover -s tests -p 'test_*.py'`
 
-Result: **pass — 158 tests**.
+Result: **pass — 161 tests**.
 
 Coverage includes:
 
@@ -30,6 +30,11 @@ Coverage includes:
 - free-text architecture aliases preserving `blackwell` as a family and
   resolving B200/GB200 to `sm100` and B300/GB300 to `sm103`, with validator
   rejection of alias collisions and product-map drift;
+- AMD-lane vocabulary: every declared family resolves to a supported exact
+  target on both vendor lanes, AMD product names (MI210/MI250X/MI300X/MI325X/
+  MI350X/MI355X) resolve to supported `gfx` targets through the query filter,
+  and AMD product or family names in PR prose mint no architecture, because
+  the extraction patterns carry no `gfx` or HIP device-code signal;
 - title-subject EPLB/DeepEP/DualPipe exclusions, incidental body/test mentions,
   cross-device implementation paths, mixed distributed/local PRs, tests,
   configuration, license-only changes, host Python, and positive CUDA/PTX/DSL

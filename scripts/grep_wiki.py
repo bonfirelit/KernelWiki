@@ -53,6 +53,7 @@ def iter_files(scope, exts=None):
         search_exts = {
             ".md",
             ".cu", ".cuh", ".ptx",
+            ".hip", ".s",
             ".cpp", ".cxx", ".cc", ".c",
             ".h", ".hpp", ".hxx", ".inl",
             ".py", ".pyx",

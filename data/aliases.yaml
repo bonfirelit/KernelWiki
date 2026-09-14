@@ -59,6 +59,75 @@ block-scale:
   - microscaling
   - MX
 
+# AMD hardware features
+mfma:
+  - MFMA
+  - "matrix core"
+  - "matrix cores"
+  - v_mfma
+
+wmma:
+  - WMMA
+  - "wave matrix multiply accumulate"
+  - v_wmma
+
+swmmac:
+  - SWMMAC
+  - "sparse WMMA"
+
+lds:
+  - LDS
+  - "local data share"
+  - "Local Data Share"
+
+ds-transpose:
+  - ds_read_tr
+  - ds_read_tr16_b64
+  - "LDS transpose read"
+
+agpr:
+  - AGPR
+  - accvgpr
+  - "accumulation VGPR"
+
+xcd:
+  - XCD
+  - "accelerator complex die"
+  - "Accelerator Complex Die"
+
+global-load-lds:
+  - global_load_lds
+  - buffer_load_lds
+  - "direct-to-LDS"
+
+sched-barrier:
+  - sched_barrier
+  - sched_group_barrier
+  - __builtin_amdgcn_sched_group_barrier
+
+mxfp4:
+  - MXFP4
+  - "OCP MXFP4"
+
+mxfp8:
+  - MXFP8
+  - "OCP MXFP8"
+
+ocp-fp8:
+  - "OCP FP8"
+  - fp8_e4m3
+  - fp8_e5m2
+
+wave32:
+  - "wave32"
+  - w32
+  - "wavefront32"
+
+wave64:
+  - "wave64"
+  - w64
+  - "wavefront64"
+
 # Architecture names
 blackwell:
   - Blackwell
@@ -80,6 +149,58 @@ sm90:
   - H200
   - H800
   - "SM90"
+
+# AMD architecture names. Product -> gfx mappings must agree with
+# scripts/pr_policy.py::PRODUCT_ARCHITECTURE_MAPPINGS; the validator
+# cross-checks them (validate.py::validate_alias_contract).
+cdna2:
+  - CDNA2
+  - "CDNA 2"
+
+cdna3:
+  - CDNA3
+  - "CDNA 3"
+
+cdna4:
+  - CDNA4
+  - "CDNA 4"
+
+rdna3:
+  - RDNA3
+  - "RDNA 3"
+
+rdna4:
+  - RDNA4
+  - "RDNA 4"
+
+gfx90a:
+  - MI210
+  - MI250
+  - MI250X
+
+gfx942:
+  - MI300X
+  - MI325X
+
+gfx950:
+  - MI350X
+  - MI355X
+
+gfx1100:
+  - "RX 7900 XTX"
+  - "RX 7900 XT"
+
+gfx1151:
+  - "Strix Halo"
+  - "Ryzen AI Max"
+
+gfx1200:
+  - "RX 9060 XT"
+
+gfx1201:
+  - "RX 9070 XT"
+  - "RX 9070"
+  - "Radeon AI PRO R9700"
 
 # Kernel types
 moe:
@@ -123,3 +244,43 @@ cuda-core-promotion:
   - "Nc=128 promotion"
   - "FP22 accumulator fix"
   - "accumulation promotion"
+
+lds-bank-conflict-avoidance:
+  - "bank conflict"
+  - "bank conflicts"
+  - "LDS padding"
+  - "XOR swizzle"
+
+instruction-scheduling:
+  - "instruction interleaving"
+  - "VMEM/MFMA interleaving"
+  - "scheduling hints"
+
+occupancy-tuning:
+  - "waves per EU"
+  - waves_per_eu
+  - "occupancy limiter"
+
+in-register-transpose:
+  - "in-register transpose"
+  - "shuffle transpose"
+
+# AMD languages / toolchains
+hip:
+  - HIP
+  - "HIP C++"
+  - hipcc
+
+triton-rocm:
+  - "Triton on ROCm"
+  - "ROCm Triton"
+
+composable-kernel:
+  - CK
+  - "CK-Tile"
+  - "Composable Kernel"
+
+amdgcn-asm:
+  - AMDGCN
+  - amdgcn
+  - "GCN assembly"

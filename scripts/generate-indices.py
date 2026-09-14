@@ -322,6 +322,18 @@ def generate_by_language(pages):
     return "\n".join(lines) + "\n"
 
 
+# `str.title()` renders the AMD family tokens as `Cdna4` / `Rdna4`. The NVIDIA
+# entries are omitted on purpose so `blackwell` keeps rendering as `Blackwell`
+# through the `.title()` fallback, byte-identical to the pre-AMD index.
+ARCHITECTURE_FAMILY_LABELS = {
+    "cdna2": "CDNA2",
+    "cdna3": "CDNA3",
+    "cdna4": "CDNA4",
+    "rdna3": "RDNA3",
+    "rdna4": "RDNA4",
+}
+
+
 def architecture_index_sets(pages):
     """Return the canonical exact, family-only, and unknown index memberships."""
     exact = defaultdict(list)
@@ -372,10 +384,12 @@ def generate_by_architecture(pages):
         "",
     ]
     for family in ARCHITECTURE_FAMILY_PREFIXES:
+        label = ARCHITECTURE_FAMILY_LABELS.get(family, family.title())
         lines.extend([
-            f"## {family.title()} family-only",
+            f"## {label} family-only",
             "",
-            f"Pages with explicit generic {family.title()} evidence but no supported exact SM in that family.",
+            f"Pages with explicit generic {label} evidence but no supported exact SM in that family. "
+            "On the AMD lane the same rule reads as no supported exact gfx target in that family.",
             "",
         ])
         _architecture_page_table(lines, family_only.get(family, []))

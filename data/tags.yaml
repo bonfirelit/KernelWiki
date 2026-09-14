@@ -1,13 +1,27 @@
 ## Controlled Vocabulary — Tags
 ## All tags used in source and wiki frontmatter must appear here.
 ## The validator (scripts/validate.py) rejects unknown tags.
+##
+## Two vendor lanes share this vocabulary. NVIDIA family tokens and `sm*`
+## exact targets are the original lane; AMD family tokens and `gfx*` exact
+## targets are the second lane. Both mirror
+## scripts/pr_policy.py::SUPPORTED_EXACT_ARCHITECTURES and
+## ARCHITECTURE_FAMILY_PREFIXES — tests/test_pr_policy.py enforces the mirror.
 
 architectures:
+  # -- NVIDIA families
   - blackwell
   - hopper
   - ampere
   - ada
   - turing
+  # -- AMD families
+  - cdna2
+  - cdna3
+  - cdna4
+  - rdna3
+  - rdna4
+  # -- NVIDIA exact targets
   - sm75
   - sm100
   - sm100a
@@ -31,8 +45,18 @@ architectures:
   - sm87
   - sm88
   - sm89
+  # -- AMD exact targets (LLVM AMDGPU processor names)
+  - gfx90a
+  - gfx942
+  - gfx950
+  - gfx1100
+  - gfx1101
+  - gfx1151
+  - gfx1200
+  - gfx1201
 
 hardware_features:
+  # -- NVIDIA
   - tcgen05
   - tmem
   - tma
@@ -50,6 +74,21 @@ hardware_features:
   - mbarrier
   - ldmatrix
   - stmatrix
+  # -- AMD
+  - mfma
+  - wmma
+  - swmmac
+  - lds
+  - ds-transpose
+  - agpr
+  - xcd
+  - global-load-lds
+  - sched-barrier
+  - mxfp4
+  - mxfp8
+  - ocp-fp8
+  - wave32
+  - wave64
 
 techniques:
   - warp-specialization
@@ -80,6 +119,11 @@ techniques:
   - top-k-selection
   - parallel-scan
   - stream-k
+  # -- AMD-originated, vendor-neutral where they apply
+  - lds-bank-conflict-avoidance
+  - instruction-scheduling
+  - occupancy-tuning
+  - in-register-transpose
 
 kernel_types:
   - gemm
@@ -104,6 +148,7 @@ kernel_types:
   - sort
 
 languages:
+  # -- NVIDIA
   - cuda-cpp
   - cute-dsl
   - triton
@@ -112,6 +157,13 @@ languages:
   - ptx
   - python
   - jax-pallas
+  # -- AMD. `triton-rocm` is a distinct token on purpose: generate-indices.py
+  # binds one language-guide page per token via its first valid language tag,
+  # so re-using `triton` would collide with lang-triton.
+  - hip
+  - triton-rocm
+  - composable-kernel
+  - amdgcn-asm
 
 confidence:
   - verified

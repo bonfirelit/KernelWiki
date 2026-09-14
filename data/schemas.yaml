@@ -136,6 +136,7 @@ wiki-hardware:
     - reproducibility
     - prerequisites
     - blackwell_relevance
+    - amd_relevance
     - evidence_basis
     - version_sensitive
   constraints:
@@ -158,6 +159,7 @@ wiki-technique:
     - aliases
     - symptoms
     - blackwell_relevance
+    - amd_relevance
     - evidence_basis
     - version_sensitive
     - artifact_dir
@@ -184,6 +186,7 @@ wiki-pattern:
     - architectures
     - confidence
     - blackwell_relevance
+    - amd_relevance
     - version_sensitive
   constraints:
     type: pattern
@@ -208,6 +211,7 @@ wiki-kernel:
     - prerequisites
     - symptoms
     - blackwell_relevance
+    - amd_relevance
     - evidence_basis
     - version_sensitive
     - artifact_dir
@@ -235,6 +239,7 @@ wiki-language:
     - aliases
     - evidence_basis
     - blackwell_relevance
+    - amd_relevance
     - version_sensitive
   constraints:
     type: language
@@ -251,8 +256,13 @@ wiki-migration:
     - tags
     - related
     - sources
-    - blackwell_relevance
   optional:
+    # Exactly one of these is required, enforced by
+    # scripts/validate.py::migration_relevance_errors: a migration page must
+    # justify itself in the NVIDIA lane (blackwell_relevance) or the AMD lane
+    # (amd_relevance).
+    - blackwell_relevance
+    - amd_relevance
     - confidence
     - reproducibility
     - prerequisites
@@ -370,7 +380,8 @@ version-claims-registry:
       - dev_branch_sha
       - notes
     constraints:
-      tool: [triton, cutlass, cuda, ptx, cute-dsl, cutile, tilelang, tilus, jax-pallas]
+      tool: [triton, cutlass, cuda, ptx, cute-dsl, cutile, tilelang, tilus, jax-pallas,
+             rocm, hip, composable-kernel, triton-rocm]
       applies_to_required_min: 1
       source_ids_required_min: 1
       id_prefix: vs-
@@ -388,7 +399,8 @@ tool-versions-snapshot:
       - upstream_checked_at
       - releases
     constraints:
-      tool: [triton, cutlass, cuda, ptx, cute-dsl, cutile, tilelang, tilus, jax-pallas]
+      tool: [triton, cutlass, cuda, ptx, cute-dsl, cutile, tilelang, tilus, jax-pallas,
+             rocm, hip, composable-kernel, triton-rocm]
   release_schema:
     required:
       - name

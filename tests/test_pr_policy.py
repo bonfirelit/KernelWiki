@@ -12,6 +12,8 @@ sys.path.insert(0, str(SCRIPTS))
 from _yaml_compat import yaml  # noqa: E402
 
 from pr_policy import (  # noqa: E402
+    AMD_PRODUCT_ARCHITECTURE_MAPPINGS,
+    ARCHITECTURE_FAMILY_PREFIXES,
     SUPPORTED_EXACT_ARCHITECTURES,
     architecture_matches_filter,
     body_contract_errors,
@@ -139,9 +141,43 @@ class ArchitecturePolicyTests(unittest.TestCase):
         architectures = set(
             yaml.safe_load((ROOT / "data" / "tags.yaml").read_text())["architectures"]
         )
-        self.assertEqual(set(SUPPORTED_EXACT_ARCHITECTURES), architectures - {
-            "blackwell", "hopper", "ampere", "ada", "turing"
-        })
+        # Family tokens are derived, not hand-listed: a literal set silently
+        # goes stale the moment a family is added on either vendor lane.
+        families = set(ARCHITECTURE_FAMILY_PREFIXES)
+        self.assertEqual(set(SUPPORTED_EXACT_ARCHITECTURES), architectures - families)
+        self.assertTrue(families.issubset(architectures))
+
+    def test_every_family_prefix_resolves_to_a_supported_exact_target(self):
+        for family, prefixes in ARCHITECTURE_FAMILY_PREFIXES.items():
+            with self.subTest(family=family):
+                self.assertTrue(
+                    any(
+                        arch.startswith(prefixes)
+                        for arch in SUPPORTED_EXACT_ARCHITECTURES
+                    ),
+                    f"family {family} has no exact target in the controlled vocabulary",
+                )
+
+    def test_amd_products_resolve_to_supported_gfx_targets(self):
+        for product, (architecture, mapping_source) in (
+            AMD_PRODUCT_ARCHITECTURE_MAPPINGS.items()
+        ):
+            with self.subTest(product=product):
+                self.assertIn(architecture, SUPPORTED_EXACT_ARCHITECTURES)
+                self.assertTrue(mapping_source.startswith("https://"))
+                self.assertTrue(
+                    architecture_matches_filter([architecture], "exact", product)
+                )
+
+    def test_amd_products_never_mint_architectures_from_pr_prose(self):
+        # AMD product names are query vocabulary only. PR-prose extraction has
+        # no gfx pattern and no HIP device-code signal, so it must not assign
+        # an AMD architecture it cannot corroborate.
+        archs, disposition, _ = derive_architectures(
+            "Tune fused MoE on MI300X and CDNA3", "", []
+        )
+        self.assertEqual([], archs)
+        self.assertEqual("unknown", disposition)
 
     def test_invalid_suffix_and_overlong_sm_tokens_are_not_exact_targets(self):
         for token in ("sm80a", "sm90f", "sm100x", "SM100X", "sm1000"):

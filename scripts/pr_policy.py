@@ -23,17 +23,45 @@ from typing import Any, Iterable
 BODY_CONTRACT = "upstream-pr-v1"
 UPSTREAM_EXCERPT_LIMIT = 1200
 
-ARCHITECTURE_FAMILY_PREFIXES = {
+## Families whose names may be *extracted* from PR prose.  This set drives
+## `_FAMILY_PATTERNS` and therefore the evidence derivation for source-PR
+## pages.  It is deliberately NVIDIA-only: the PR intake lane in this
+## repository covers CUDA/CuTe/PTX repositories, and the surrounding
+## extraction regexes (`_EXACT_SM_RE`, `_NUMERIC_CUDA_ARCH_RE`,
+## `_ARCHITECTURE_GUARD_LINE_RE`) recognise `sm_*` / `__CUDA_ARCH__` only.
+## Adding AMD here without a matching `gfx` extraction pattern and HIP
+## device-code signals would assign families the evidence cannot support.
+_EXTRACTION_FAMILY_PREFIXES = {
     "turing": ("sm75",),
     "ampere": ("sm80", "sm86", "sm87", "sm88"),
     "ada": ("sm89",),
     "hopper": ("sm90",),
     "blackwell": ("sm100", "sm103", "sm110", "sm120", "sm121"),
 }
+
+## Families recognised as *vocabulary* — by the schema validator, the query
+## filters, and the generated architecture index.  NVIDIA families first so
+## that `queries/by-architecture.md` section order is unchanged (the index
+## generator iterates insertion order); AMD families appended after.
+ARCHITECTURE_FAMILY_PREFIXES = {
+    **_EXTRACTION_FAMILY_PREFIXES,
+    "cdna2": ("gfx90a",),
+    "cdna3": ("gfx942",),
+    "cdna4": ("gfx950",),
+    "rdna3": ("gfx1100", "gfx1101", "gfx1151"),
+    "rdna4": ("gfx1200", "gfx1201"),
+}
 BLACKWELL_EXACT_PREFIXES = ARCHITECTURE_FAMILY_PREFIXES["blackwell"]
 
-# Canonical exact targets accepted by both extraction and schema validation.
-# SM88 is intentional: CUDA 13.3 NVCC lists ``sm_88`` as a supported GPU code.
+## Families belonging to each vendor lane, for scope rules that differ per
+## vendor (see scripts/validate.py::wiki_scope_relevance_errors).
+NVIDIA_ARCHITECTURE_FAMILIES = frozenset(_EXTRACTION_FAMILY_PREFIXES)
+AMD_ARCHITECTURE_FAMILIES = frozenset(ARCHITECTURE_FAMILY_PREFIXES) - NVIDIA_ARCHITECTURE_FAMILIES
+
+## Canonical exact targets accepted by both extraction and schema validation.
+## SM88 is intentional: CUDA 13.3 NVCC lists ``sm_88`` as a supported GPU code.
+## The ``gfx`` entries are LLVM AMDGPU processor names; they are vocabulary
+## only and are never produced by PR-prose extraction (see above).
 SUPPORTED_EXACT_ARCHITECTURES = (
     "sm75",
     "sm80", "sm86", "sm87", "sm88", "sm89",
@@ -43,6 +71,11 @@ SUPPORTED_EXACT_ARCHITECTURES = (
     "sm110", "sm110a", "sm110f",
     "sm120", "sm120a", "sm120f",
     "sm121", "sm121a", "sm121f",
+    "gfx90a",
+    "gfx942",
+    "gfx950",
+    "gfx1100", "gfx1101", "gfx1151",
+    "gfx1200", "gfx1201",
 )
 _SUPPORTED_EXACT_ARCHITECTURE_SET = set(SUPPORTED_EXACT_ARCHITECTURES)
 
@@ -51,8 +84,9 @@ _EXACT_SM_RE = re.compile(
 )
 _FAMILY_PATTERNS = {
     family: re.compile(rf"(?<![a-z0-9]){family}(?![a-z0-9])", re.IGNORECASE)
-    for family in ARCHITECTURE_FAMILY_PREFIXES
+    for family in _EXTRACTION_FAMILY_PREFIXES
 }
+
 _PORTABLE_ARCH_ATOM_SUFFIX_RE = re.compile(
     r"^_(?:cp_async|bulk_copy|tma|mma|wgmma|ldmatrix|stmatrix|copy|load|store)(?:_|$)",
     re.IGNORECASE,
@@ -138,6 +172,29 @@ PRODUCT_ARCHITECTURE_MAPPINGS = {
         "sm80",
         "https://developer.nvidia.com/cuda/gpus",
     ),
+}
+
+## AMD product names are vocabulary for the *query* surface only and are
+## deliberately kept out of `PRODUCT_ARCHITECTURE_MAPPINGS`: that dict feeds
+## `_PRODUCT_RE`, which is an extraction pattern.  Letting "MI300X" mint a
+## `cdna3` assignment from PR prose would produce architecture evidence that
+## the surrounding `sm_*` / `__CUDA_ARCH__` guard rules cannot corroborate.
+## Every entry names the product together with its LLVM AMDGPU processor on
+## the cited page; no other product name is canonicalized by inference.
+AMD_PRODUCT_ARCHITECTURE_MAPPINGS = {
+    "mi210": ("gfx90a", "https://llvm.org/docs/AMDGPUUsage.html#processors"),
+    "mi250": ("gfx90a", "https://llvm.org/docs/AMDGPUUsage.html#processors"),
+    "mi250x": ("gfx90a", "https://llvm.org/docs/AMDGPUUsage.html#processors"),
+    "mi300x": ("gfx942", "https://llvm.org/docs/AMDGPUUsage.html#processors"),
+    "mi325x": ("gfx942", "https://llvm.org/docs/AMDGPUUsage.html#processors"),
+    "mi350x": ("gfx950", "https://llvm.org/docs/AMDGPUUsage.html#processors"),
+    "mi355x": ("gfx950", "https://llvm.org/docs/AMDGPUUsage.html#processors"),
+}
+
+## Union used by user-facing architecture filters and by the alias contract.
+QUERY_PRODUCT_ARCHITECTURE_MAPPINGS = {
+    **PRODUCT_ARCHITECTURE_MAPPINGS,
+    **AMD_PRODUCT_ARCHITECTURE_MAPPINGS,
 }
 
 _PRODUCT_RE = re.compile(
@@ -1092,8 +1149,8 @@ def architecture_matches_filter(architectures: Iterable[str], disposition: str, 
     """Canonical user-facing architecture hierarchy semantics."""
     archs = {str(value).lower() for value in architectures or []}
     requested = requested.lower().replace("_", "")
-    if requested in PRODUCT_ARCHITECTURE_MAPPINGS:
-        requested = PRODUCT_ARCHITECTURE_MAPPINGS[requested][0]
+    if requested in QUERY_PRODUCT_ARCHITECTURE_MAPPINGS:
+        requested = QUERY_PRODUCT_ARCHITECTURE_MAPPINGS[requested][0]
     if requested == "unknown":
         return disposition == "unknown" and not archs
     if requested in ARCHITECTURE_FAMILY_PREFIXES:

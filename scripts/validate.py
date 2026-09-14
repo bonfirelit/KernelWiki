@@ -11,8 +11,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _yaml_compat import yaml  # noqa: E402
 from pr_policy import (  # noqa: E402
+    AMD_ARCHITECTURE_FAMILIES,
     ARCHITECTURE_FAMILY_PREFIXES,
-    PRODUCT_ARCHITECTURE_MAPPINGS,
+    NVIDIA_ARCHITECTURE_FAMILIES,
+    QUERY_PRODUCT_ARCHITECTURE_MAPPINGS,
     SUPPORTED_EXACT_ARCHITECTURES,
     body_contract_errors,
     device_code_pattern_sha256,
@@ -42,6 +44,20 @@ def architecture_family_values(family):
 HOPPER_ARCHITECTURES = architecture_family_values("hopper")
 BLACKWELL_ARCHITECTURES = architecture_family_values("blackwell")
 
+# Vendor lanes. The NVIDIA lane is Blackwell-first; the AMD lane is
+# CDNA3/CDNA4 + RDNA3/RDNA4-first. A wiki page that sits entirely outside its
+# lane's in-scope generations must say why it is kept (see
+# wiki_scope_relevance_errors).
+NVIDIA_ARCHITECTURES = frozenset().union(
+    *(architecture_family_values(family) for family in NVIDIA_ARCHITECTURE_FAMILIES)
+)
+AMD_ARCHITECTURES = frozenset().union(
+    *(architecture_family_values(family) for family in AMD_ARCHITECTURE_FAMILIES)
+)
+AMD_IN_SCOPE_ARCHITECTURES = frozenset().union(
+    *(architecture_family_values(family) for family in ("cdna3", "cdna4", "rdna3", "rdna4"))
+)
+
 # Offline contract for curated wiki/source-doc links into NVIDIA's rolling PTX
 # ISA. Each fragment was resolved against PTX ISA 9.3 on 2026-08-19.
 PTX_ISA_CURATED_ANCHORS = frozenset({
@@ -68,6 +84,7 @@ BUNDLE_SIZE_CAP_BYTES = 5 * 1024 * 1024
 # Phase-3 asset-source contract.
 ASSET_SOURCE_EXTS = {
     ".cu", ".cuh", ".ptx",
+    ".hip", ".s",
     ".cpp", ".h", ".hpp",
     ".py", ".pyx",
     ".patch",
@@ -124,7 +141,7 @@ def validate_alias_contract(raw=None):
             else:
                 resolved[normalized] = canonical
 
-    for product, (expected_architecture, _source) in PRODUCT_ARCHITECTURE_MAPPINGS.items():
+    for product, (expected_architecture, _source) in QUERY_PRODUCT_ARCHITECTURE_MAPPINGS.items():
         actual = resolved.get(product)
         if actual is not None and actual.lower() != expected_architecture:
             errors.append(
@@ -556,6 +573,49 @@ def blackwell_relevance_errors(fm, page_type, rel="wiki page"):
     return []
 
 
+def amd_relevance_errors(fm, page_type, rel="wiki page"):
+    """Require justification for AMD wiki pages outside the in-scope lane.
+
+    Mirror image of `blackwell_relevance_errors` for the AMD lane: CDNA3/CDNA4
+    and RDNA3/RDNA4 are primary, so a page whose only AMD targets are older
+    generations (CDNA2 / gfx90a) must state why it is kept.
+    """
+    if not page_type.startswith("wiki-"):
+        return []
+    archs = set(
+        fm.get("architectures", [])
+        if isinstance(fm.get("architectures"), list)
+        else []
+    )
+    amd_archs = archs & AMD_ARCHITECTURES
+    if not amd_archs:
+        return []
+    if amd_archs & AMD_IN_SCOPE_ARCHITECTURES:
+        return []
+    if archs & NVIDIA_ARCHITECTURES:
+        # A cross-vendor page is already anchored by its NVIDIA targets.
+        return []
+    if "amd_relevance" in fm:
+        return []
+    return [
+        f"{rel}: page targets only pre-CDNA3 AMD {sorted(amd_archs)} without an "
+        "in-scope CDNA3/CDNA4/RDNA3/RDNA4 arch; add 'amd_relevance' to justify "
+        "inclusion in the AMD lane"
+    ]
+
+
+def migration_relevance_errors(fm, page_type, rel="wiki page"):
+    """Every migration page must justify itself in at least one vendor lane."""
+    if page_type != "wiki-migration":
+        return []
+    if "blackwell_relevance" in fm or "amd_relevance" in fm:
+        return []
+    return [
+        f"{rel}: migration page must carry 'blackwell_relevance' (NVIDIA lane) "
+        "or 'amd_relevance' (AMD lane)"
+    ]
+
+
 def repro_at_least(level, minimum):
     if level not in REPRO_ORDER or minimum not in REPRO_ORDER:
         return False
@@ -597,6 +657,16 @@ _CODE_INDICATORS = re.compile(
     # PTX
     r'tcgen05|mbarrier|cp\.async|ld\.global|st\.global|'
     r'\.reg\s|\.pred\s|cvt\.\w+|mov\.b32|'
+    # AMDGCN / CDNA / RDNA assembly. The PTX branch above matches nothing in a
+    # `v_mfma` / `ds_read` / `s_waitcnt` listing, so an AMD asm fence would
+    # otherwise fail the snippet-reproducibility gate.
+    r'v_mfma_\w+|v_wmma_\w+|v_swmmac_\w+|v_accvgpr_\w+|'
+    r'ds_read\w*|ds_write\w*|s_waitcnt|s_barrier|s_setprio|'
+    r'global_load_\w+|global_store_\w+|buffer_load_\w+|buffer_store_\w+|'
+    r'v_mov_b32|s_mov_b32|s_mov_b64|v_cvt_\w+|'
+    # HIP host/device
+    r'__builtin_amdgcn_\w+|hipLaunchKernelGGL|__HIP_DEVICE_COMPILE__|'
+    r'__AMDGCN_WAVEFRONT_SIZE__|hip[A-Z]\w+|'
     # TileLang (TVM-based DSL)
     r'@T\.prim_func|T\.alloc_buffer|T\.grid|T\.block_attr|T\.reads|T\.writes|'
     # cuTile (NVIDIA Python DSL)
@@ -912,6 +982,8 @@ def validate_file(filepath, schemas, valid_tags, all_source_ids, code_langs):
             )
 
     errors.extend(blackwell_relevance_errors(fm, page_type, rel))
+    errors.extend(amd_relevance_errors(fm, page_type, rel))
+    errors.extend(migration_relevance_errors(fm, page_type, rel))
 
     # Check performance_claims structure (including shape and numeric value)
     if "performance_claims" in fm:

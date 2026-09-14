@@ -193,6 +193,7 @@ def main():
             # validate.py ASSET_SOURCE_EXTS and query.py --has-code exts.
             exts = {
                 ".cu", ".cuh", ".ptx",
+                ".hip", ".s",
                 ".cpp", ".cxx", ".cc", ".c",
                 ".h", ".hpp", ".hxx", ".inl",
                 ".py", ".pyx",

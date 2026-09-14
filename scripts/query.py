@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unified query tool for the Blackwell kernel wiki.
+"""Unified query tool for the GPU kernel wiki (NVIDIA and AMD lanes).
 
 Supports natural-language keyword queries, tag filters, repo filters, and type filters.
 
@@ -25,7 +25,10 @@ from _yaml_compat import yaml  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _wiki_root import WIKI_ROOT  # noqa: E402
-from pr_policy import architecture_matches_filter  # noqa: E402
+from pr_policy import (  # noqa: E402
+    ARCHITECTURE_FAMILY_PREFIXES,
+    architecture_matches_filter,
+)
 
 
 _ALIAS_CACHE = None
@@ -214,7 +217,8 @@ def filter_pages(pages, args):
             # validate.py's ASSET_SOURCE_EXTS and get_page.py's
             # --include-code exts; the three together form the Phase-3
             # asset-source contract.
-            exts = {".cu", ".cuh", ".ptx", ".py", ".cpp", ".h", ".hpp", ".inl",
+            exts = {".cu", ".cuh", ".ptx", ".hip", ".s",
+                    ".py", ".cpp", ".h", ".hpp", ".inl",
                     ".pyx", ".cxx", ".cc", ".txt",
                     ".sh", ".yaml", ".json"}
             candidate_dirs = []
@@ -266,7 +270,10 @@ def filter_pages(pages, args):
 def architecture_filter_exclusion_counts(pages, requested):
     """Counts disclosed when an exact query omits broader evidence classes."""
     normalized = requested.lower().replace("_", "")
-    if normalized in {"blackwell", "hopper", "ampere", "ada", "unknown"}:
+    # Derived, not hand-copied: a stale literal set silently emits the
+    # exclusion banner for any family it forgot (this is why `turing` and the
+    # AMD families used to misbehave here).
+    if normalized in set(ARCHITECTURE_FAMILY_PREFIXES) | {"unknown"}:
         return None
     family_only = sum(p["fm"].get("architecture_disposition") == "family" for p in pages)
     unknown = sum(
@@ -311,13 +318,13 @@ def format_result(page, compact=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Query the Blackwell kernel wiki")
+    parser = argparse.ArgumentParser(description="Query the GPU kernel wiki (NVIDIA and AMD lanes)")
     parser.add_argument("query", nargs="*", help="Free-text keywords")
     parser.add_argument("--type", help="Filter by page type (kernel, technique, hardware, pattern, language, migration, pr, blog, doc, contest)")
     parser.add_argument("--tag", help="Filter by tag (must appear in tags/techniques/hardware_features/kernel_types/languages)")
     parser.add_argument("--repo", help="Filter by source repo (partial match, e.g. 'cutlass')")
-    parser.add_argument("--language", help="Filter by language/DSL (cute-dsl, cuda-cpp, ptx, triton, etc.)")
-    parser.add_argument("--architecture", help="Filter by exact architecture, blackwell family hierarchy, or unknown")
+    parser.add_argument("--language", help="Filter by language/DSL (cute-dsl, cuda-cpp, ptx, triton, hip, triton-rocm, etc.)")
+    parser.add_argument("--architecture", help="Filter by exact architecture (sm100, gfx1201), family (blackwell, rdna4), product (B200, MI300X), or unknown")
     parser.add_argument("--symptom", help="Filter by pattern symptom (memory-bound, register-pressure, etc.)")
     parser.add_argument("--confidence", help="Filter by confidence (verified, source-reported, inferred, experimental)")
     parser.add_argument("--has-code", action="store_true", help="Only return pages whose artifact_dir contains at least one source file")
