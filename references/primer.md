@@ -64,6 +64,7 @@ All page IDs below resolve via `get_page.py <id>`. All paths are relative to the
 | Hand-scheduling AMD kernels | `technique-instruction-scheduling-amd` | `sched_barrier` / `sched_group_barrier` / `s_setprio`. Last rung, worth ~1.2x — do it after vectorizing. |
 | Occupancy tuning on AMD | `technique-occupancy-tuning-amd` | The four limiters and `waves_per_eu`; **and why an MFMA-bound kernel holds ~97% of peak at ~12% occupancy**. |
 | In-register transpose (RDNA4) | `technique-in-register-transpose` | gfx12 has no `ds_read_tr`; fold the transpose into the LDS write or shuffle in registers. |
+| ROCm SDPA / FlashAttention backends | `technique-rocm-attention-backends` | Pick AOTriton vs CK vs Triton-aiter; pin `SDPBackend.FLASH_ATTENTION`; per-arch gaps (gfx1201 hipblasLt, gfx950 hdim). |
 
 ---
 

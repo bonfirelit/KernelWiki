@@ -141,7 +141,7 @@ Pages with explicit generic CDNA2 evidence but no supported exact SM in that fam
 
 | Page | Path |
 |------|------|
-| _None_ | |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 
 ## CDNA3 family-only
 
@@ -151,7 +151,10 @@ Pages with explicit generic CDNA3 evidence but no supported exact SM in that fam
 |------|------|
 | [Memory Instruction Scheduling for Lock-Stepped Kernels on AMD Instinct MI300X](../sources/blogs/rocm-memory-instruction-scheduling.md) | `sources/blogs/rocm-memory-instruction-scheduling.md` |
 | [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
+| [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
@@ -165,6 +168,7 @@ Pages with explicit generic CDNA3 evidence but no supported exact SM in that fam
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
 
 ## CDNA4 family-only
 
@@ -176,7 +180,10 @@ Pages with explicit generic CDNA4 evidence but no supported exact SM in that fam
 | [Production-Ready MXFP4 Online Rotation with Fused Kernels on AMD Instinct MI355X](../sources/blogs/rocm-mxfp4-fused-rotation.md) | `sources/blogs/rocm-mxfp4-fused-rotation.md` |
 | [Occupancy Math on the AMD MI355X GPU (CDNA4): A From-First-Principles Guide](../sources/blogs/rocm-occupancy-math-mi355x.md) | `sources/blogs/rocm-occupancy-math-mi355x.md` |
 | [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
+| [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
@@ -192,6 +199,7 @@ Pages with explicit generic CDNA4 evidence but no supported exact SM in that fam
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
 
 ## RDNA3 family-only
 
@@ -200,7 +208,9 @@ Pages with explicit generic RDNA3 evidence but no supported exact SM in that fam
 | Page | Path |
 |------|------|
 | [Using the Matrix Cores of AMD RDNA 4 architecture GPUs](../sources/docs/amd-rdna4-matrix-cores.md) | `sources/docs/amd-rdna4-matrix-cores.md` |
+| [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [WMMA on RDNA4 (gfx12)](../wiki/hardware/wmma-rdna4.md) | `wiki/hardware/wmma-rdna4.md` |
 
 ## RDNA4 family-only
@@ -211,7 +221,10 @@ Pages with explicit generic RDNA4 evidence but no supported exact SM in that fam
 |------|------|
 | [rdna4-wmma-guide — WMMA lane mapping for gfx12 and a fused MXFP4 GEMM](../sources/blogs/rdna4-wmma-lane-mapping.md) | `sources/blogs/rdna4-wmma-lane-mapping.md` |
 | [Using the Matrix Cores of AMD RDNA 4 architecture GPUs](../sources/docs/amd-rdna4-matrix-cores.md) | `sources/docs/amd-rdna4-matrix-cores.md` |
+| [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
 | [gfx1201 (RDNA4) as a kernel target](../wiki/hardware/gfx1201.md) | `wiki/hardware/gfx1201.md` |
@@ -226,6 +239,7 @@ Pages with explicit generic RDNA4 evidence but no supported exact SM in that fam
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
 
 ## Architecture unknown
 
@@ -568,7 +582,9 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 
 | Page | Path |
 |------|------|
+| [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 
 ### `gfx1200`
 
@@ -585,7 +601,10 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 |------|------|
 | [rdna4-wmma-guide — WMMA lane mapping for gfx12 and a fused MXFP4 GEMM](../sources/blogs/rdna4-wmma-lane-mapping.md) | `sources/blogs/rdna4-wmma-lane-mapping.md` |
 | [Using the Matrix Cores of AMD RDNA 4 architecture GPUs](../sources/docs/amd-rdna4-matrix-cores.md) | `sources/docs/amd-rdna4-matrix-cores.md` |
+| [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
 | [gfx1201 (RDNA4) as a kernel target](../wiki/hardware/gfx1201.md) | `wiki/hardware/gfx1201.md` |
@@ -600,12 +619,14 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
 
 ### `gfx90a`
 
 | Page | Path |
 |------|------|
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 
 ### `gfx942`
 
@@ -613,7 +634,10 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 |------|------|
 | [Memory Instruction Scheduling for Lock-Stepped Kernels on AMD Instinct MI300X](../sources/blogs/rocm-memory-instruction-scheduling.md) | `sources/blogs/rocm-memory-instruction-scheduling.md` |
 | [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
+| [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
@@ -627,6 +651,7 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
 
 ### `gfx950`
 
@@ -636,7 +661,10 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [Production-Ready MXFP4 Online Rotation with Fused Kernels on AMD Instinct MI355X](../sources/blogs/rocm-mxfp4-fused-rotation.md) | `sources/blogs/rocm-mxfp4-fused-rotation.md` |
 | [Occupancy Math on the AMD MI355X GPU (CDNA4): A From-First-Principles Guide](../sources/blogs/rocm-occupancy-math-mi355x.md) | `sources/blogs/rocm-occupancy-math-mi355x.md` |
 | [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
+| [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
+| [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
+| [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
@@ -652,6 +680,7 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
 
 ### `sm100`
 
@@ -696,6 +725,7 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [NVIDIA Blackwell Tuning Guide](../sources/docs/nvidia-blackwell-tuning-guide.md) | `sources/docs/nvidia-blackwell-tuning-guide.md` |
 | [NVIDIA CUTLASS Blackwell support map](../sources/docs/nvidia-cutlass-blackwell.md) | `sources/docs/nvidia-cutlass-blackwell.md` |
 | [PTX ISA Fifth-Generation Tensor Core and CLC Reference](../sources/docs/nvidia-ptx-isa-sm100.md) | `sources/docs/nvidia-ptx-isa-sm100.md` |
+| [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
 | [Triton 3.6 Release Notes — Blackwell Backend Work](../sources/docs/triton-3.6-blackwell.md) | `sources/docs/triton-3.6-blackwell.md` |
 | [Fix multicast bug and optimize masked GEMM](../sources/prs/DeepGEMM/PR-193.md) | `sources/prs/DeepGEMM/PR-193.md` |
 | [[Public release 26/04] Introducing Mega MoE, FP4 Indexer and other features/fixes](../sources/prs/DeepGEMM/PR-304.md) | `sources/prs/DeepGEMM/PR-304.md` |
@@ -1495,6 +1525,7 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [cuTile Python Documentation](../sources/docs/cutile-python-dsl.md) | `sources/docs/cutile-python-dsl.md` |
 | [CUTLASS CuTe DSL Documentation](../sources/docs/cutlass-cute-dsl.md) | `sources/docs/cutlass-cute-dsl.md` |
 | [K-Search: LLM Kernel Generation via Co-Evolving Intrinsic World Model](../sources/docs/k-search-kernel-generation.md) | `sources/docs/k-search-kernel-generation.md` |
+| [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
 | [Tiled Flash Linear Attention (TFLA)](../sources/docs/tfla.md) | `sources/docs/tfla.md` |
 | [Fix performance issue of m-grouped contiguous GEMMs.](../sources/prs/DeepGEMM/PR-168.md) | `sources/prs/DeepGEMM/PR-168.md` |
 | [Fix multicast bug and optimize masked GEMM](../sources/prs/DeepGEMM/PR-193.md) | `sources/prs/DeepGEMM/PR-193.md` |

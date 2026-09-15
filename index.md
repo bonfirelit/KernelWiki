@@ -105,6 +105,7 @@ its content transfers to RDNA4.
 - [technique-instruction-scheduling-amd](wiki/techniques/instruction-scheduling-amd.md) — `sched_barrier`, `sched_group_barrier`, `s_setprio`
 - [technique-occupancy-tuning-amd](wiki/techniques/occupancy-tuning-amd.md) — the four limiters, and when occupancy is the wrong target
 - [technique-in-register-transpose](wiki/techniques/in-register-transpose.md) — transposing WMMA operands without `ds_read_tr`
+- [technique-rocm-attention-backends](wiki/techniques/rocm-attention-backends.md) — choosing the SDPA / FlashAttention backend (AOTriton, CK, Triton-aiter) and pinning the flash path
 
 ### Kernel Case Studies
 

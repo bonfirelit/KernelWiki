@@ -90,7 +90,7 @@ Auto-generated under `queries/`:
 
 - `queries/by-architecture.md` — exact SM/gfx targets, family-only lanes (Turing through Blackwell; CDNA2 through RDNA4), and validated-unknown architecture evidence
 - `queries/by-problem.md` — symptom → pattern page → candidate techniques
-- `queries/by-technique.md` — 21 techniques with architectures, confidence, reproducibility, source count
+- `queries/by-technique.md` — 22 techniques with architectures, confidence, reproducibility, source count
 - `queries/by-hardware-feature.md` — tcgen05/tmem/clc/tma/nvfp4/etc. → related wiki + PR pages
 - `queries/by-kernel-type.md` — gemm/attention/moe/mla/gated-delta-net → pages
 - `queries/by-language.md` — cute-dsl/cuda-cpp/ptx/triton → guide page + related kernels/sources

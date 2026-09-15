@@ -5,6 +5,7 @@
 | Technique | Tags | Architectures | Confidence | Reproducibility | Sources |
 |-----------|------|--------------|------------|-----------------|---------|
 | [CCCL CUB SM100 Scan Tuning](../wiki/techniques/cccl-memory-primitives.md) | cuda-cpp, parallel-scan, vectorized-loads, tile-scheduling | sm100 | source-reported | snippet | 1 |
+| [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | attention, flash-attention, triton-rocm, composable-kernel | gfx1201, gfx942, gfx950, rdna4, cdna3, cdna4 | source-reported | snippet | 3 |
 | [Chunk-Based Parallelism for Linear Recurrent Models](../wiki/techniques/chunk-parallelism.md) | chunk-parallelism, linear-attention, triton | sm90 | source-reported | snippet | 2 |
 | [Double/Multi-Buffering Patterns](../wiki/techniques/double-buffering.md) | double-buffering, tmem, pipeline-stages | sm100, sm90 | source-reported | snippet | 3 |
 | [Epilogue fusion](../wiki/techniques/epilogue-fusion.md) | epilogue-fusion, tmem, warp-specialization | sm100, sm90 | source-reported | snippet | 2 |
