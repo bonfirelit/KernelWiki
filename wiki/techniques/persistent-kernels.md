@@ -7,7 +7,7 @@ tags: [persistent-kernel, clc, tile-scheduling]
 confidence: source-reported
 reproducibility: snippet
 prerequisites: [hw-clc]
-related: [hw-clc, technique-tile-scheduling, pattern-tail-effect]
+related: [hw-clc, technique-tile-scheduling, pattern-tail-effect, technique-stream-k]
 sources: [doc-cutlass-clc, doc-ptx-isa-sm100, pr-flash-attention-2441, blog-tcgen05-tutorial]
 ---
 

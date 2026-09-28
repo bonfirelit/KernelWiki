@@ -5,7 +5,7 @@ type: migration
 from_arch: gfx942
 to_arch: gfx1201
 tags: [mfma, wmma, agpr, global-load-lds, ds-transpose, lds, wave32, wave64]
-related: [hw-gfx1201, hw-wmma-rdna4, hw-mfma-cdna, hw-lds, hw-amd-memory-ops, technique-in-register-transpose, technique-occupancy-tuning-amd, kernel-rdna4-wmma-gemm, kernel-cdna4-fp8-gemm]
+related: [hw-gfx1201, hw-wmma-rdna4, hw-mfma-cdna, hw-lds, hw-amd-memory-ops, technique-in-register-transpose, technique-occupancy-tuning-amd, kernel-rdna4-wmma-gemm, kernel-cdna4-fp8-gemm, migration-gfx942-to-gfx950]
 sources: [doc-amd-rdna4-matrix-cores, blog-salykova-matrix-cores-cdna, blog-rocm-fp8-gemm-cdna4, blog-rocm-occupancy-mi355x, blog-rdna4-wmma-lane-mapping, blog-rocm-mxfp4-rotation, doc-rocm-workload-optimization]
 amd_relevance: "Nearly all published AMD kernel-optimization writing targets CDNA (MI300X/MI355X), while RDNA4 is the target most developers can actually buy. This page is the accounting of which CDNA techniques survive the move and which have no gfx12 counterpart at all."
 confidence: source-reported

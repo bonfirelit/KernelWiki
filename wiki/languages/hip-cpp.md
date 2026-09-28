@@ -3,7 +3,7 @@ id: lang-hip
 title: "HIP C++ for AMD kernels"
 type: language
 tags: [hip, wmma, mfma, lds, amdgcn-asm]
-related: [hw-gfx1201, hw-wmma-rdna4, hw-mfma-cdna, hw-lds, hw-amd-memory-ops, lang-amdgcn-asm, lang-triton-rocm, lang-composable-kernel, migration-cuda-to-hip]
+related: [hw-gfx1201, hw-wmma-rdna4, hw-mfma-cdna, hw-lds, hw-amd-memory-ops, lang-amdgcn-asm, lang-triton-rocm, lang-composable-kernel, lang-rocwmma, migration-cuda-to-hip]
 sources: [doc-amd-rdna4-matrix-cores, doc-rocm-workload-optimization, doc-llvm-amdgpu-usage, blog-salykova-matrix-cores-cdna]
 reproducibility: snippet
 architectures: [gfx1201, gfx942, gfx950, rdna4, cdna3, cdna4]
@@ -73,7 +73,7 @@ __global__ void wmma_gemm_16x16(const _Float16* __restrict__ A,
 
 | Concern | CUDA C++ | HIP C++ |
 |---|---|---|
-| Wave width | 32, fixed | 32 on RDNA, **64 on CDNA** — `warpSize` is not a constant you may assume |
+| Wave width | 32, fixed | 32 or 64 on RDNA (wave64 exists but WMMA kernels use wave32; gfx1201 defaults to 32), **64 on CDNA** — `warpSize` is not a constant you may assume |
 | Matrix core | `wmma::` API / `mma.sync` PTX | `__builtin_amdgcn_wmma_*` / `__builtin_amdgcn_mfma_*`, no layout-abstracting fragment type |
 | Async copy | `cp.async` / TMA descriptors | `llvm.amdgcn.raw.buffer.load.lds` on CDNA only |
 | Completion | `mbarrier` | `s_waitcnt vmcnt/lgkmcnt` + `s_barrier` |
@@ -92,4 +92,6 @@ layout, or hand-placed wait counts — that is, when the schedule *is* the
 optimization. Prefer `lang-triton-rocm` when the kernel is shape-parametric and
 autotuning over tile sizes will find most of the win, and
 `lang-composable-kernel` when a templated CDNA GEMM/attention pipeline already
-exists for your shape.
+exists for your shape. Between raw builtins and CK sits `lang-rocwmma`: a
+fragment API that keeps one source portable across MFMA (CDNA) and WMMA (RDNA)
+when layout abstraction is worth more than schedule control.

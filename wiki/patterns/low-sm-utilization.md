@@ -4,7 +4,7 @@ title: "Low SM Utilization"
 type: pattern
 tags: [persistent-kernel, clc, tile-scheduling]
 symptoms: [low-sm-utilization, tail-effect, load-imbalance]
-candidate_techniques: [technique-persistent-kernels, technique-tile-scheduling, hw-clc, technique-occupancy-tuning-amd]
+candidate_techniques: [technique-persistent-kernels, technique-tile-scheduling, hw-clc, technique-occupancy-tuning-amd, technique-split-k, technique-stream-k, hw-chiplet-xcd]
 related: [pattern-tail-effect, pattern-compute-bound]
 sources: [doc-nvidia-tuning-guide, blog-tcgen05-tutorial, pr-cutlass-2161, blog-rocm-occupancy-mi355x, doc-rocm-workload-optimization]
 ---

@@ -7,7 +7,7 @@ tags: [instruction-scheduling, sched-barrier, mfma, lds, pipeline-stages]
 confidence: source-reported
 reproducibility: snippet
 prerequisites: [hw-amd-memory-ops, hw-lds]
-related: [hw-mfma-cdna, hw-amd-memory-ops, technique-ping-pong-scheduling, technique-pipeline-stages, pattern-pipeline-stalls, kernel-cdna4-fp8-gemm]
+related: [hw-mfma-cdna, hw-amd-memory-ops, technique-ping-pong-scheduling, technique-pipeline-stages, pattern-pipeline-stalls, kernel-cdna4-fp8-gemm, technique-mfma-pipelining]
 sources: [blog-rocm-fp8-gemm-cdna4, blog-rocm-memory-scheduling, doc-rocm-workload-optimization]
 symptoms: [pipeline-stalls, low-compute-utilization]
 ---

@@ -98,6 +98,8 @@ its content transfers to RDNA4.
 - [hw-lds](wiki/hardware/lds.md) — Local Data Share: capacity, banking, `lgkmcnt`
 - [hw-amd-memory-ops](wiki/hardware/amd-memory-ops.md) — `global_load_dwordx4`, direct-to-LDS, wait counters
 - [hw-amd-narrow-precision](wiki/hardware/amd-narrow-precision.md) — OCP FP8, MXFP4/MXFP8, E8M0 scales
+- [hw-cross-lane](wiki/hardware/cross-lane.md) — DPP / `ds_permute` / `v_permlane16_swap`: moving data between lanes
+- [hw-chiplet-xcd](wiki/hardware/chiplet-xcd.md) — 8-XCD chiplet topology: private L2s, MALL, partition modes
 
 ### Optimization Techniques
 
@@ -106,6 +108,13 @@ its content transfers to RDNA4.
 - [technique-occupancy-tuning-amd](wiki/techniques/occupancy-tuning-amd.md) — the four limiters, and when occupancy is the wrong target
 - [technique-in-register-transpose](wiki/techniques/in-register-transpose.md) — transposing WMMA operands without `ds_read_tr`
 - [technique-rocm-attention-backends](wiki/techniques/rocm-attention-backends.md) — choosing the SDPA / FlashAttention backend (AOTriton, CK, Triton-aiter) and pinning the flash path
+- [technique-mfma-pipelining](wiki/techniques/mfma-pipelining.md) — keeping the matrix unit fed: prefetch, waitcnt discipline, scheduler fences
+- [technique-split-k](wiki/techniques/split-k.md) — partition K when the tile grid underfills the GPU
+- [technique-stream-k](wiki/techniques/stream-k.md) — flat MAC-space decomposition over a persistent grid
+- [technique-preshuffle-layout](wiki/techniques/preshuffle-layout.md) — permute static weights into MFMA lane order offline
+- [technique-wave-reduction](wiki/techniques/wave-reduction.md) — the DPP + `ds_bpermute` wave64 reduction tree
+- [technique-buffer-oob-guard](wiki/techniques/buffer-oob-guard.md) — branchless tails via the buffer descriptor's bounds net
+- [technique-profiling-workflow](wiki/techniques/profiling-workflow.md) — rocprofv3 → rocprof-compute → pattern page, and the counter-name traps
 
 ### Kernel Case Studies
 
@@ -115,6 +124,7 @@ its content transfers to RDNA4.
 ### Problem → Solution Patterns
 
 - [pattern-lds-bank-conflicts](wiki/patterns/lds-bank-conflicts.md) — LDS accesses serialize
+- [pattern-xcd-locality](wiki/patterns/xcd-locality.md) — tiles that share operands land on different XCDs' private L2s
 - The NVIDIA pattern pages above also carry `## On AMD (CDNA / RDNA4)` sections
 
 ### Languages & DSLs
@@ -123,11 +133,14 @@ its content transfers to RDNA4.
 - [lang-triton-rocm](wiki/languages/triton-rocm.md) — Triton on ROCm and its AMD-only launch parameters
 - [lang-amdgcn-asm](wiki/languages/amdgcn-asm.md) — reading the ISA dump, and inline asm
 - [lang-composable-kernel](wiki/languages/composable-kernel.md) — CK / CK-Tile
+- [lang-rocwmma](wiki/languages/rocwmma.md) — portable fragment API over MFMA (CDNA) and WMMA (RDNA)
+- [lang-flydsl](wiki/languages/flydsl.md) — experimental MLIR layout DSL, with a first-party gfx950 profiling sweep
 
 ### Migration Guides
 
 - [migration-cuda-to-hip](wiki/migration/cuda-to-hip.md) — CUDA (sm90) → HIP (gfx942)
 - [migration-cdna-to-rdna4](wiki/migration/cdna-to-rdna4.md) — CDNA (gfx942) → RDNA4 (gfx1201)
+- [migration-gfx942-to-gfx950](wiki/migration/gfx942-to-gfx950.md) — CDNA3 → CDNA4: the FP8 re-encode, LDS doubling, scaled MFMA
 
 ## Source Repositories
 

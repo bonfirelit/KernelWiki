@@ -149,26 +149,41 @@ Pages with explicit generic CDNA3 evidence but no supported exact SM in that fam
 
 | Page | Path |
 |------|------|
+| [AMDGPU Kernel Optimization Guide (nod-ai / amd-shark-ai)](../sources/blogs/amdgpu-kernel-opt-guide.md) | `sources/blogs/amdgpu-kernel-opt-guide.md` |
+| [ROCmKernelWiki — CDNA kernel optimization KB with MI350X silicon verification](../sources/blogs/rocm-kernel-wiki.md) | `sources/blogs/rocm-kernel-wiki.md` |
 | [Memory Instruction Scheduling for Lock-Stepped Kernels on AMD Instinct MI300X](../sources/blogs/rocm-memory-instruction-scheduling.md) | `sources/blogs/rocm-memory-instruction-scheduling.md` |
 | [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
 | [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
+| [AMD Instinct MI300 (CDNA3) Instruction Set Architecture](../sources/docs/cdna3-isa.md) | `sources/docs/cdna3-isa.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
 | [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
 | [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [XCD chiplets: per-XCD L2, MALL, and partition modes](../wiki/hardware/chiplet-xcd.md) | `wiki/hardware/chiplet-xcd.md` |
+| [Cross-Lane Data Movement (DPP, ds_swizzle, ds_permute/bpermute, permlane)](../wiki/hardware/cross-lane.md) | `wiki/hardware/cross-lane.md` |
 | [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
 | [MFMA on CDNA3 and CDNA4](../wiki/hardware/mfma-cdna.md) | `wiki/hardware/mfma-cdna.md` |
 | [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
 | [Composable Kernel (CK / CK-Tile)](../wiki/languages/composable-kernel.md) | `wiki/languages/composable-kernel.md` |
+| [FlyDSL](../wiki/languages/flydsl.md) | `wiki/languages/flydsl.md` |
 | [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [rocWMMA](../wiki/languages/rocwmma.md) | `wiki/languages/rocwmma.md` |
 | [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
 | [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [Cross-XCD traffic: tile neighborhoods scattered across chiplet L2s](../wiki/patterns/xcd-locality.md) | `wiki/patterns/xcd-locality.md` |
+| [Branchless Bounds Checking with Buffer Descriptors](../wiki/techniques/buffer-oob-guard.md) | `wiki/techniques/buffer-oob-guard.md` |
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [MFMA Software Pipelining — Keeping the Matrix Core Fed](../wiki/techniques/mfma-pipelining.md) | `wiki/techniques/mfma-pipelining.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Preshuffled Weight Layouts for MFMA](../wiki/techniques/preshuffle-layout.md) | `wiki/techniques/preshuffle-layout.md` |
+| [Profiling Workflow on ROCm: counter to diagnosis](../wiki/techniques/profiling-workflow.md) | `wiki/techniques/profiling-workflow.md` |
 | [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
+| [Split-K (GlobalSplitU) — Parallelizing the K Reduction](../wiki/techniques/split-k.md) | `wiki/techniques/split-k.md` |
+| [Stream-K — Flat MAC-Iteration Decomposition over a Persistent Grid](../wiki/techniques/stream-k.md) | `wiki/techniques/stream-k.md` |
+| [Wave-Level Reduction (DPP rows + ds_bpermute + readfirstlane)](../wiki/techniques/wave-reduction.md) | `wiki/techniques/wave-reduction.md` |
 
 ## CDNA4 family-only
 
@@ -176,30 +191,46 @@ Pages with explicit generic CDNA4 evidence but no supported exact SM in that fam
 
 | Page | Path |
 |------|------|
+| [AMDGPU Kernel Optimization Guide (nod-ai / amd-shark-ai)](../sources/blogs/amdgpu-kernel-opt-guide.md) | `sources/blogs/amdgpu-kernel-opt-guide.md` |
+| [FlyDSL Kernel Profiling — MI350X rocprofv3 ATT Sweep & Dashboard](../sources/blogs/flydsl-kernel-profiling.md) | `sources/blogs/flydsl-kernel-profiling.md` |
 | [FP8 GEMM Optimization on AMD CDNA4 Architecture](../sources/blogs/rocm-fp8-gemm-cdna4.md) | `sources/blogs/rocm-fp8-gemm-cdna4.md` |
+| [ROCmKernelWiki — CDNA kernel optimization KB with MI350X silicon verification](../sources/blogs/rocm-kernel-wiki.md) | `sources/blogs/rocm-kernel-wiki.md` |
 | [Production-Ready MXFP4 Online Rotation with Fused Kernels on AMD Instinct MI355X](../sources/blogs/rocm-mxfp4-fused-rotation.md) | `sources/blogs/rocm-mxfp4-fused-rotation.md` |
 | [Occupancy Math on the AMD MI355X GPU (CDNA4): A From-First-Principles Guide](../sources/blogs/rocm-occupancy-math-mi355x.md) | `sources/blogs/rocm-occupancy-math-mi355x.md` |
 | [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
 | [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
+| [AMD Instinct (CDNA4) Instruction Set Architecture](../sources/docs/cdna4-isa.md) | `sources/docs/cdna4-isa.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
 | [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
 | [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [XCD chiplets: per-XCD L2, MALL, and partition modes](../wiki/hardware/chiplet-xcd.md) | `wiki/hardware/chiplet-xcd.md` |
+| [Cross-Lane Data Movement (DPP, ds_swizzle, ds_permute/bpermute, permlane)](../wiki/hardware/cross-lane.md) | `wiki/hardware/cross-lane.md` |
 | [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
 | [MFMA on CDNA3 and CDNA4](../wiki/hardware/mfma-cdna.md) | `wiki/hardware/mfma-cdna.md` |
 | [FP8 GEMM on CDNA4 — the measured optimization ladder](../wiki/kernels/cdna4-fp8-gemm.md) | `wiki/kernels/cdna4-fp8-gemm.md` |
 | [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
 | [Composable Kernel (CK / CK-Tile)](../wiki/languages/composable-kernel.md) | `wiki/languages/composable-kernel.md` |
+| [FlyDSL](../wiki/languages/flydsl.md) | `wiki/languages/flydsl.md` |
 | [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [rocWMMA](../wiki/languages/rocwmma.md) | `wiki/languages/rocwmma.md` |
 | [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
 | [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [Cross-XCD traffic: tile neighborhoods scattered across chiplet L2s](../wiki/patterns/xcd-locality.md) | `wiki/patterns/xcd-locality.md` |
+| [Branchless Bounds Checking with Buffer Descriptors](../wiki/techniques/buffer-oob-guard.md) | `wiki/techniques/buffer-oob-guard.md` |
 | [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [MFMA Software Pipelining — Keeping the Matrix Core Fed](../wiki/techniques/mfma-pipelining.md) | `wiki/techniques/mfma-pipelining.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Preshuffled Weight Layouts for MFMA](../wiki/techniques/preshuffle-layout.md) | `wiki/techniques/preshuffle-layout.md` |
+| [Profiling Workflow on ROCm: counter to diagnosis](../wiki/techniques/profiling-workflow.md) | `wiki/techniques/profiling-workflow.md` |
 | [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
+| [Split-K (GlobalSplitU) — Parallelizing the K Reduction](../wiki/techniques/split-k.md) | `wiki/techniques/split-k.md` |
+| [Stream-K — Flat MAC-Iteration Decomposition over a Persistent Grid](../wiki/techniques/stream-k.md) | `wiki/techniques/stream-k.md` |
+| [Wave-Level Reduction (DPP rows + ds_bpermute + readfirstlane)](../wiki/techniques/wave-reduction.md) | `wiki/techniques/wave-reduction.md` |
 
 ## RDNA3 family-only
 
@@ -227,19 +258,27 @@ Pages with explicit generic RDNA4 evidence but no supported exact SM in that fam
 | [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [Cross-Lane Data Movement (DPP, ds_swizzle, ds_permute/bpermute, permlane)](../wiki/hardware/cross-lane.md) | `wiki/hardware/cross-lane.md` |
 | [gfx1201 (RDNA4) as a kernel target](../wiki/hardware/gfx1201.md) | `wiki/hardware/gfx1201.md` |
 | [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
 | [WMMA on RDNA4 (gfx12)](../wiki/hardware/wmma-rdna4.md) | `wiki/hardware/wmma-rdna4.md` |
 | [Fused MXFP4 -> FP16 WMMA GEMM on gfx1201](../wiki/kernels/rdna4-wmma-gemm.md) | `wiki/kernels/rdna4-wmma-gemm.md` |
 | [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
 | [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [rocWMMA](../wiki/languages/rocwmma.md) | `wiki/languages/rocwmma.md` |
 | [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
 | [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [Branchless Bounds Checking with Buffer Descriptors](../wiki/techniques/buffer-oob-guard.md) | `wiki/techniques/buffer-oob-guard.md` |
 | [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Preshuffled Weight Layouts for MFMA](../wiki/techniques/preshuffle-layout.md) | `wiki/techniques/preshuffle-layout.md` |
+| [Profiling Workflow on ROCm: counter to diagnosis](../wiki/techniques/profiling-workflow.md) | `wiki/techniques/profiling-workflow.md` |
 | [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
+| [Split-K (GlobalSplitU) — Parallelizing the K Reduction](../wiki/techniques/split-k.md) | `wiki/techniques/split-k.md` |
+| [Stream-K — Flat MAC-Iteration Decomposition over a Persistent Grid](../wiki/techniques/stream-k.md) | `wiki/techniques/stream-k.md` |
+| [Wave-Level Reduction (DPP rows + ds_bpermute + readfirstlane)](../wiki/techniques/wave-reduction.md) | `wiki/techniques/wave-reduction.md` |
 
 ## Architecture unknown
 
@@ -607,19 +646,27 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [Cross-Lane Data Movement (DPP, ds_swizzle, ds_permute/bpermute, permlane)](../wiki/hardware/cross-lane.md) | `wiki/hardware/cross-lane.md` |
 | [gfx1201 (RDNA4) as a kernel target](../wiki/hardware/gfx1201.md) | `wiki/hardware/gfx1201.md` |
 | [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
 | [WMMA on RDNA4 (gfx12)](../wiki/hardware/wmma-rdna4.md) | `wiki/hardware/wmma-rdna4.md` |
 | [Fused MXFP4 -> FP16 WMMA GEMM on gfx1201](../wiki/kernels/rdna4-wmma-gemm.md) | `wiki/kernels/rdna4-wmma-gemm.md` |
 | [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
 | [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [rocWMMA](../wiki/languages/rocwmma.md) | `wiki/languages/rocwmma.md` |
 | [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
 | [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [Branchless Bounds Checking with Buffer Descriptors](../wiki/techniques/buffer-oob-guard.md) | `wiki/techniques/buffer-oob-guard.md` |
 | [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Preshuffled Weight Layouts for MFMA](../wiki/techniques/preshuffle-layout.md) | `wiki/techniques/preshuffle-layout.md` |
+| [Profiling Workflow on ROCm: counter to diagnosis](../wiki/techniques/profiling-workflow.md) | `wiki/techniques/profiling-workflow.md` |
 | [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
+| [Split-K (GlobalSplitU) — Parallelizing the K Reduction](../wiki/techniques/split-k.md) | `wiki/techniques/split-k.md` |
+| [Stream-K — Flat MAC-Iteration Decomposition over a Persistent Grid](../wiki/techniques/stream-k.md) | `wiki/techniques/stream-k.md` |
+| [Wave-Level Reduction (DPP rows + ds_bpermute + readfirstlane)](../wiki/techniques/wave-reduction.md) | `wiki/techniques/wave-reduction.md` |
 
 ### `gfx90a`
 
@@ -632,55 +679,86 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 
 | Page | Path |
 |------|------|
+| [AMDGPU Kernel Optimization Guide (nod-ai / amd-shark-ai)](../sources/blogs/amdgpu-kernel-opt-guide.md) | `sources/blogs/amdgpu-kernel-opt-guide.md` |
+| [ROCmKernelWiki — CDNA kernel optimization KB with MI350X silicon verification](../sources/blogs/rocm-kernel-wiki.md) | `sources/blogs/rocm-kernel-wiki.md` |
 | [Memory Instruction Scheduling for Lock-Stepped Kernels on AMD Instinct MI300X](../sources/blogs/rocm-memory-instruction-scheduling.md) | `sources/blogs/rocm-memory-instruction-scheduling.md` |
 | [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
 | [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
+| [AMD Instinct MI300 (CDNA3) Instruction Set Architecture](../sources/docs/cdna3-isa.md) | `sources/docs/cdna3-isa.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
 | [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
 | [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [XCD chiplets: per-XCD L2, MALL, and partition modes](../wiki/hardware/chiplet-xcd.md) | `wiki/hardware/chiplet-xcd.md` |
+| [Cross-Lane Data Movement (DPP, ds_swizzle, ds_permute/bpermute, permlane)](../wiki/hardware/cross-lane.md) | `wiki/hardware/cross-lane.md` |
 | [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
 | [MFMA on CDNA3 and CDNA4](../wiki/hardware/mfma-cdna.md) | `wiki/hardware/mfma-cdna.md` |
 | [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
 | [Composable Kernel (CK / CK-Tile)](../wiki/languages/composable-kernel.md) | `wiki/languages/composable-kernel.md` |
+| [FlyDSL](../wiki/languages/flydsl.md) | `wiki/languages/flydsl.md` |
 | [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [rocWMMA](../wiki/languages/rocwmma.md) | `wiki/languages/rocwmma.md` |
 | [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
 | [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [Cross-XCD traffic: tile neighborhoods scattered across chiplet L2s](../wiki/patterns/xcd-locality.md) | `wiki/patterns/xcd-locality.md` |
+| [Branchless Bounds Checking with Buffer Descriptors](../wiki/techniques/buffer-oob-guard.md) | `wiki/techniques/buffer-oob-guard.md` |
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [MFMA Software Pipelining — Keeping the Matrix Core Fed](../wiki/techniques/mfma-pipelining.md) | `wiki/techniques/mfma-pipelining.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Preshuffled Weight Layouts for MFMA](../wiki/techniques/preshuffle-layout.md) | `wiki/techniques/preshuffle-layout.md` |
+| [Profiling Workflow on ROCm: counter to diagnosis](../wiki/techniques/profiling-workflow.md) | `wiki/techniques/profiling-workflow.md` |
 | [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
+| [Split-K (GlobalSplitU) — Parallelizing the K Reduction](../wiki/techniques/split-k.md) | `wiki/techniques/split-k.md` |
+| [Stream-K — Flat MAC-Iteration Decomposition over a Persistent Grid](../wiki/techniques/stream-k.md) | `wiki/techniques/stream-k.md` |
+| [Wave-Level Reduction (DPP rows + ds_bpermute + readfirstlane)](../wiki/techniques/wave-reduction.md) | `wiki/techniques/wave-reduction.md` |
 
 ### `gfx950`
 
 | Page | Path |
 |------|------|
+| [AMDGPU Kernel Optimization Guide (nod-ai / amd-shark-ai)](../sources/blogs/amdgpu-kernel-opt-guide.md) | `sources/blogs/amdgpu-kernel-opt-guide.md` |
+| [FlyDSL Kernel Profiling — MI350X rocprofv3 ATT Sweep & Dashboard](../sources/blogs/flydsl-kernel-profiling.md) | `sources/blogs/flydsl-kernel-profiling.md` |
 | [FP8 GEMM Optimization on AMD CDNA4 Architecture](../sources/blogs/rocm-fp8-gemm-cdna4.md) | `sources/blogs/rocm-fp8-gemm-cdna4.md` |
+| [ROCmKernelWiki — CDNA kernel optimization KB with MI350X silicon verification](../sources/blogs/rocm-kernel-wiki.md) | `sources/blogs/rocm-kernel-wiki.md` |
 | [Production-Ready MXFP4 Online Rotation with Fused Kernels on AMD Instinct MI355X](../sources/blogs/rocm-mxfp4-fused-rotation.md) | `sources/blogs/rocm-mxfp4-fused-rotation.md` |
 | [Occupancy Math on the AMD MI355X GPU (CDNA4): A From-First-Principles Guide](../sources/blogs/rocm-occupancy-math-mi355x.md) | `sources/blogs/rocm-occupancy-math-mi355x.md` |
 | [Matrix Core Programming on AMD CDNA3 and CDNA4 architecture](../sources/blogs/salykova-matrix-cores-cdna.md) | `sources/blogs/salykova-matrix-cores-cdna.md` |
 | [AOTriton — Ahead-of-Time Triton math library (ROCm)](../sources/docs/aotriton.md) | `sources/docs/aotriton.md` |
+| [AMD Instinct (CDNA4) Instruction Set Architecture](../sources/docs/cdna4-isa.md) | `sources/docs/cdna4-isa.md` |
 | [LLVM AMDGPUUsage — target processors and address spaces](../sources/docs/llvm-amdgpu-usage.md) | `sources/docs/llvm-amdgpu-usage.md` |
 | [PyTorch scaled_dot_product_attention backend selection (sdpa_kernel)](../sources/docs/pytorch-sdpa-backends.md) | `sources/docs/pytorch-sdpa-backends.md` |
 | [ROCm flash-attention — CK and Triton backends](../sources/docs/rocm-flash-attention.md) | `sources/docs/rocm-flash-attention.md` |
 | [AMD Instinct MI300 / MI350 Series workload optimization](../sources/docs/rocm-workload-optimization.md) | `sources/docs/rocm-workload-optimization.md` |
 | [AMD global memory ops, direct-to-LDS, and wait counters](../wiki/hardware/amd-memory-ops.md) | `wiki/hardware/amd-memory-ops.md` |
 | [OCP FP8, MXFP8/MXFP6/MXFP4, and E8M0 block scales on AMD](../wiki/hardware/amd-narrow-precision.md) | `wiki/hardware/amd-narrow-precision.md` |
+| [XCD chiplets: per-XCD L2, MALL, and partition modes](../wiki/hardware/chiplet-xcd.md) | `wiki/hardware/chiplet-xcd.md` |
+| [Cross-Lane Data Movement (DPP, ds_swizzle, ds_permute/bpermute, permlane)](../wiki/hardware/cross-lane.md) | `wiki/hardware/cross-lane.md` |
 | [LDS (Local Data Share)](../wiki/hardware/lds.md) | `wiki/hardware/lds.md` |
 | [MFMA on CDNA3 and CDNA4](../wiki/hardware/mfma-cdna.md) | `wiki/hardware/mfma-cdna.md` |
 | [FP8 GEMM on CDNA4 — the measured optimization ladder](../wiki/kernels/cdna4-fp8-gemm.md) | `wiki/kernels/cdna4-fp8-gemm.md` |
 | [AMDGCN assembly and inline asm](../wiki/languages/amdgcn-asm.md) | `wiki/languages/amdgcn-asm.md` |
 | [Composable Kernel (CK / CK-Tile)](../wiki/languages/composable-kernel.md) | `wiki/languages/composable-kernel.md` |
+| [FlyDSL](../wiki/languages/flydsl.md) | `wiki/languages/flydsl.md` |
 | [HIP C++ for AMD kernels](../wiki/languages/hip-cpp.md) | `wiki/languages/hip-cpp.md` |
+| [rocWMMA](../wiki/languages/rocwmma.md) | `wiki/languages/rocwmma.md` |
 | [Triton on ROCm](../wiki/languages/triton-rocm.md) | `wiki/languages/triton-rocm.md` |
 | [LDS Bank Conflicts](../wiki/patterns/lds-bank-conflicts.md) | `wiki/patterns/lds-bank-conflicts.md` |
+| [Cross-XCD traffic: tile neighborhoods scattered across chiplet L2s](../wiki/patterns/xcd-locality.md) | `wiki/patterns/xcd-locality.md` |
+| [Branchless Bounds Checking with Buffer Descriptors](../wiki/techniques/buffer-oob-guard.md) | `wiki/techniques/buffer-oob-guard.md` |
 | [In-Register Transpose for WMMA Operands](../wiki/techniques/in-register-transpose.md) | `wiki/techniques/in-register-transpose.md` |
 | [Hand-Scheduling AMD Kernels (sched_barrier, sched_group_barrier, s_setprio)](../wiki/techniques/instruction-scheduling-amd.md) | `wiki/techniques/instruction-scheduling-amd.md` |
 | [LDS Bank Conflict Avoidance](../wiki/techniques/lds-bank-conflict-avoidance.md) | `wiki/techniques/lds-bank-conflict-avoidance.md` |
+| [MFMA Software Pipelining — Keeping the Matrix Core Fed](../wiki/techniques/mfma-pipelining.md) | `wiki/techniques/mfma-pipelining.md` |
 | [Occupancy Tuning on AMD (and when not to)](../wiki/techniques/occupancy-tuning-amd.md) | `wiki/techniques/occupancy-tuning-amd.md` |
+| [Preshuffled Weight Layouts for MFMA](../wiki/techniques/preshuffle-layout.md) | `wiki/techniques/preshuffle-layout.md` |
+| [Profiling Workflow on ROCm: counter to diagnosis](../wiki/techniques/profiling-workflow.md) | `wiki/techniques/profiling-workflow.md` |
 | [Choosing and Tuning the SDPA / FlashAttention Backend on ROCm](../wiki/techniques/rocm-attention-backends.md) | `wiki/techniques/rocm-attention-backends.md` |
+| [Split-K (GlobalSplitU) — Parallelizing the K Reduction](../wiki/techniques/split-k.md) | `wiki/techniques/split-k.md` |
+| [Stream-K — Flat MAC-Iteration Decomposition over a Persistent Grid](../wiki/techniques/stream-k.md) | `wiki/techniques/stream-k.md` |
+| [Wave-Level Reduction (DPP rows + ds_bpermute + readfirstlane)](../wiki/techniques/wave-reduction.md) | `wiki/techniques/wave-reduction.md` |
 
 ### `sm100`
 
