@@ -6,7 +6,7 @@ tags: [tmem, register-reuse, warp-specialization]
 symptoms: [register-pressure, low-occupancy, register-spilling]
 candidate_techniques: [hw-tmem, technique-warp-specialization, migration-register-to-tmem, technique-occupancy-tuning-amd, technique-register-budgeting]
 related: [pattern-compute-bound, hw-tmem]
-sources: [doc-ptx-isa-sm100, pr-vllm-16032, blog-rocm-occupancy-mi355x, doc-rocm-workload-optimization]
+sources: [doc-ptx-isa-sm100, pr-vllm-16032, blog-rocm-occupancy-mi355x, doc-rocm-workload-optimization, blog-rocm-kernel-wiki]
 ---
 
 # Register pressure
@@ -29,11 +29,14 @@ On `sm_100a`/`sm_100f`, PTX exposes each CTA a TMEM view of 512 columns by 128 l
 ## On AMD (CDNA / RDNA4)
 
 Read `.vgpr_count`, `.agpr_count`, and `.sgpr_count` straight out of the ISA
-(`AMDGCN_ENABLE_DUMP=1`). **Allocation granularity is per-generation**: MI300X
-rounds VGPRs to blocks of 16, so usage of 170 becomes 176 and `176 * 3 > 512`
-caps residency at 2 waves/EU; MI355X rounds to groups of 8
-(`doc-rocm-workload-optimization`, `blog-rocm-occupancy-mi355x`). Sitting a few
-registers above a boundary is the one case where `waves_per_eu` earns its keep.
+(`AMDGCN_ENABLE_DUMP=1`). Note `.vgpr_count` already includes the AGPR
+allocation on ROCm 7+ — `.agpr_count` is a subset, never sum them. **Allocation
+granularity is 8 registers on both gfx942 and gfx950** (verified by decoding
+`COMPUTE_PGM_RSRC1` from clang-emitted gfx942 descriptors; the "blocks of 16"
+phrasing in `doc-rocm-workload-optimization` does not match the emitted
+encoding, though its 170→176 worked example is still correct since 176 is a
+multiple of 8). Sitting a few registers above a boundary is the one case where
+`waves_per_eu` earns its keep.
 
 On CDNA there is a second file: VGPRs and AGPRs share 512 registers per lane with
 neither class exceeding 256, and a GEMM that keeps its C tile in AGPRs

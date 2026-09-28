@@ -83,8 +83,9 @@ llvm_amdgcn_raw_buffer_load_lds(/* rsrc */ a_desc, /* lds */ a_lds_offset,
                                 /* soffset */ 0, /* offset */ 0,
                                 /* aux */ 0);
 
-// Rung 6: XOR swizzle on 16-byte columns. ds_read_b128 runs in four phases and
-// each must be conflict-free.
+// Rung 6: XOR swizzle on 16-byte columns. ds_read_b128 runs in per-lane
+// phases (four 16-lane phases on gfx950, eight 8-lane phases on gfx942) and
+// each phase must independently be conflict-free.
 const int swizzled_col = c ^ (perm << 4);
 
 // Rung 9: the ping-pong schedule. Fence the scheduler, then win the arbiter

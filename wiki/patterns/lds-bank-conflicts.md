@@ -6,7 +6,7 @@ tags: [lds, lds-bank-conflict-avoidance, swizzling, shared-memory-optimization]
 symptoms: [lds-bank-conflicts, high-lgkmcnt-wait, memory-bound, low-compute-utilization]
 candidate_techniques: [technique-lds-bank-conflict-avoidance, technique-swizzling, hw-lds, technique-in-register-transpose]
 related: [pattern-memory-bound, pattern-pipeline-stalls, hw-lds, kernel-cdna4-fp8-gemm]
-sources: [blog-rocm-fp8-gemm-cdna4, doc-rocm-workload-optimization, blog-rocm-memory-scheduling]
+sources: [blog-rocm-fp8-gemm-cdna4, doc-rocm-workload-optimization, blog-rocm-memory-scheduling, blog-rocm-kernel-wiki]
 architectures: [gfx1201, gfx942, gfx950, rdna4, cdna3, cdna4]
 confidence: source-reported
 ---
@@ -26,11 +26,12 @@ for bandwidth made things *worse* rather than better.
 - **A power-of-two row stride.** A tile declared `float tile[N][32]` puts every
   column-wise access in the same bank. The classic case, and the reason
   `[N][32+1]` is such a common idiom.
-- **A wide access that conflicts per-phase.** `ds_read_b128` executes in four
-  phases and *each phase* must independently be conflict-free
-  (`blog-rocm-fp8-gemm-cdna4`). A layout verified against `ds_read_b32` can
-  conflict badly at `b128`. This is the cause that surprises people, because it
-  appears when following the bandwidth advice.
+- **A wide access that conflicts per-phase.** `ds_read_b128` executes in
+  per-lane phases — eight 8-lane phases on gfx942, four 16-lane phases on
+  gfx950 — and *each phase* must independently be conflict-free
+  (`blog-rocm-fp8-gemm-cdna4`, `blog-rocm-kernel-wiki`). A layout verified
+  against `ds_read_b32` can conflict badly at `b128`. This is the cause that
+  surprises people, because it appears when following the bandwidth advice.
 - **A transposed read of a linearly written tile.** Storing row-major and reading
   column-major to feed the matrix core is the standard source; on gfx1201 there
   is no `ds_read_tr16_b64` to absorb it.

@@ -8,7 +8,7 @@ confidence: source-reported
 reproducibility: snippet
 prerequisites: [hw-lds]
 related: [hw-lds, technique-swizzling, pattern-lds-bank-conflicts, pattern-memory-bound, kernel-cdna4-fp8-gemm]
-sources: [blog-rocm-fp8-gemm-cdna4, doc-rocm-workload-optimization, blog-rocm-memory-scheduling]
+sources: [blog-rocm-fp8-gemm-cdna4, doc-rocm-workload-optimization, blog-rocm-memory-scheduling, blog-rocm-kernel-wiki]
 symptoms: [lds-bank-conflicts, memory-bound]
 ---
 
@@ -20,8 +20,11 @@ looks like memory-bound behaviour.
 
 ## The wide-access subtlety
 
-`ds_read_b128` is not one access. It executes in **four phases, and each phase
-must independently be conflict-free** (`blog-rocm-fp8-gemm-cdna4`). A layout
+`ds_read_b128` is not one access. A full-wavefront b128 read executes in
+per-lane phases — **eight 8-lane phases on gfx942, four 16-lane phases on
+gfx950** — and **each phase must independently be conflict-free**
+(`blog-rocm-fp8-gemm-cdna4`, `blog-rocm-kernel-wiki`; the exact gfx950 b128
+lane groupings are upstream-empirical, not reproduced on-device). A layout
 that is conflict-free for `ds_read_b32` can conflict badly once you widen to
 `b128` — which the ROCm ISA checklist tells you to do for bandwidth. The two
 goals pull against each other, and that is exactly why a swizzle is needed

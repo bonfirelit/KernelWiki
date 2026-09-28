@@ -8,7 +8,7 @@ confidence: source-reported
 reproducibility: snippet
 prerequisites: [hw-lds]
 related: [hw-lds, hw-gfx1201, hw-mfma-cdna, technique-register-budgeting, pattern-register-pressure, pattern-low-sm-utilization, lang-triton-rocm]
-sources: [doc-rocm-workload-optimization, blog-rocm-occupancy-mi355x]
+sources: [doc-rocm-workload-optimization, blog-rocm-occupancy-mi355x, blog-rocm-kernel-wiki]
 symptoms: [register-pressure, low-occupancy, low-compute-utilization]
 ---
 
@@ -32,11 +32,17 @@ Per `blog-rocm-occupancy-mi355x` (MI355X / CDNA4), occupancy is the minimum of:
 clamped to 8 waves/SIMD and 32 waves/CU. On CDNA4 VGPRs and AGPRs share one
 512-register-per-lane file, with neither class exceeding 256.
 
-**Allocation granularity is per-generation and it matters.**
-`doc-rocm-workload-optimization` states MI300X allocates VGPRs "in blocks of 16"
-with a worked example: usage of 170 rounds to 176, and `176 x 3 > 512` caps
-occupancy at 2 waves/EU. `blog-rocm-occupancy-mi355x` reports MI355X rounding "to
-groups of 8". Do not carry a granularity constant across targets.
+**Allocation granularity is per-generation and it matters.** On both gfx942 and
+gfx950 the combined VGPR+AGPR allocation rounds to **units of 8** — verified on
+this host by decoding `COMPUTE_PGM_RSRC1` from kernel descriptors clang emits
+for gfx942 (21 VGPRs used → field value 2 → (2+1)×8 = 24 allocated; granularity
+16 would have encoded 32). `doc-rocm-workload-optimization`'s "MI300X allocates
+VGPRs in blocks of 16" does not match the emitted encoding; its worked example
+(170 → 176, `176 x 3 > 512` capping occupancy at 2 waves/EU) is still correct
+arithmetic, but 176 is 22×8 — the example never discriminates between the two
+granularities. One metadata trap: since ROCm 7 the `.vgpr_count` HSA metadata
+**already includes** the AGPR allocation and `.agpr_count` is a subset of it —
+never sum the two.
 
 ## Computing it for a real kernel
 
@@ -60,8 +66,9 @@ occupancy is the smaller of the register- and LDS-derived figures
 
 `waves_per_eu=n` asks the LLVM backend to shrink VGPR usage until `n` waves fit.
 It is worth trying in exactly one situation: occupancy is VGPR-limited **and**
-usage sits a few registers above a granularity boundary. At 176 registers, asking
-for 3 waves/EU may cost nothing. At 250 it will cost spills.
+usage sits a few registers above a granularity boundary. At 176 registers, 3
+waves/EU needs ≤168 (one granule of 8 down) — that may cost nothing. At 250 it
+will cost spills.
 
 ```python
 # Triton on ROCm. num_stages: 2 for a single GEMM, 1 for two fused GEMMs

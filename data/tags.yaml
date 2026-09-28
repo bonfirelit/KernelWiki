@@ -89,6 +89,7 @@ hardware_features:
   - ocp-fp8
   - wave32
   - wave64
+  - cross-lane
 
 techniques:
   - warp-specialization
@@ -124,6 +125,12 @@ techniques:
   - instruction-scheduling
   - occupancy-tuning
   - in-register-transpose
+  - split-k
+  - mfma-pipelining
+  - wave-reduction
+  - preshuffle-layout
+  - profiling
+  - bounds-checking
 
 kernel_types:
   - gemm
@@ -164,6 +171,8 @@ languages:
   - triton-rocm
   - composable-kernel
   - amdgcn-asm
+  - rocwmma
+  - flydsl
 
 confidence:
   - verified
