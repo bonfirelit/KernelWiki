@@ -1412,6 +1412,7 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [[Bugfix] Guard mxfp4_experts_quant bindings on ENABLE_NVFP4_SM100](../sources/prs/vllm/PR-40191.md) | `sources/prs/vllm/PR-40191.md` |
 | [[Perf] Batch invariance with Cutlass fp8 support, 28.9% E2E latency improvement](../sources/prs/vllm/PR-40408.md) | `sources/prs/vllm/PR-40408.md` |
 | [Cluster Launch Control (CLC)](../wiki/hardware/clc.md) | `wiki/hardware/clc.md` |
+| [GB10 (sm_121) as a kernel target](../wiki/hardware/gb10.md) | `wiki/hardware/gb10.md` |
 | [Programmatic Dependent Launch / Grid Dependency Control](../wiki/hardware/pdl-gdc.md) | `wiki/hardware/pdl-gdc.md` |
 
 ### `sm120a`
@@ -1434,6 +1435,7 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 
 | Page | Path |
 |------|------|
+| [NVIDIA DGX Spark (GB10) — product specifications](../sources/docs/nvidia-dgx-spark-gb10.md) | `sources/docs/nvidia-dgx-spark-gb10.md` |
 | [PTX ISA Fifth-Generation Tensor Core and CLC Reference](../sources/docs/nvidia-ptx-isa-sm100.md) | `sources/docs/nvidia-ptx-isa-sm100.md` |
 | [[None][feat] GPT-OSS Sm120/Sm121 Support](../sources/prs/TensorRT-LLM/PR-7937.md) | `sources/prs/TensorRT-LLM/PR-7937.md` |
 | [Small Tile N BlockScaled GEMM + Grouped GEMM on SM12x](../sources/prs/cutlass/PR-3176.md) | `sources/prs/cutlass/PR-3176.md` |
@@ -1457,6 +1459,7 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [[Bugfix] Fix DSV3 kernels breaking _C and _moe_C on unsupported arches](../sources/prs/vllm/PR-35123.md) | `sources/prs/vllm/PR-35123.md` |
 | [[NVIDIA] Bugfix NVFP4 DGX Spark and RTX50](../sources/prs/vllm/PR-38423.md) | `sources/prs/vllm/PR-38423.md` |
 | [Cluster Launch Control (CLC)](../wiki/hardware/clc.md) | `wiki/hardware/clc.md` |
+| [GB10 (sm_121) as a kernel target](../wiki/hardware/gb10.md) | `wiki/hardware/gb10.md` |
 
 ### `sm121a`
 
@@ -1465,6 +1468,7 @@ Source-PR pages whose validated evidence review found no family-level or exact a
 | [Add SM120 varlen attention support](../sources/prs/flash-attention/PR-2333.md) | `sources/prs/flash-attention/PR-2333.md` |
 | [feat: cutlass fp4 gemm bringup for SM120 & SM121](../sources/prs/flashinfer/PR-1609.md) | `sources/prs/flashinfer/PR-1609.md` |
 | [feat: cutlass fp8 gemm bringup for SM120 & SM121](../sources/prs/flashinfer/PR-1610.md) | `sources/prs/flashinfer/PR-1610.md` |
+| [GB10 (sm_121) as a kernel target](../wiki/hardware/gb10.md) | `wiki/hardware/gb10.md` |
 
 ### `sm75`
 

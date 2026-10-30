@@ -5,7 +5,7 @@ type: pattern
 tags: [vectorized-loads, cache-policy, shared-memory-optimization]
 symptoms: [memory-bound, low-compute-utilization, high-memory-throughput]
 candidate_techniques: [technique-vectorized-loads, technique-swizzling, technique-pipeline-stages, technique-lds-bank-conflict-avoidance, hw-amd-memory-ops]
-related: [pattern-compute-bound, kernel-nvfp4-gemv]
+related: [pattern-compute-bound, kernel-nvfp4-gemv, hw-gb10]
 sources: [blog-yue-nvfp4, blog-amandeep-nvfp4, doc-nvidia-tuning-guide, blog-rocm-fp8-gemm-cdna4, doc-rocm-workload-optimization]
 ---
 
@@ -44,6 +44,16 @@ the selected GPU and workload.
   nominally memory-heavy kernel. Yue Zhang's reported NVFP4 GEMV stages changed
   memory access, conversion, instruction count, and ILP together, so they do not
   establish a universal optimization order.
+
+## On GB10 / DGX Spark (sm_121)
+
+On the unified-LPDDR5x parts the speed-of-light bound is the 273 GB/s *system*
+budget (≈235 GB/s measured from a kernel), and the bf16 ridge point sits at
+~460 FLOP/byte — assume bandwidth-bound unless the kernel is a large GEMM.
+The lever specific to this machine is **eliminating staging copies**:
+`cudaMemcpy` HtoD measures 58 GB/s while a kernel reading pageable host memory
+in place measures 162 GB/s (221 GB/s pinned). Per-allocator numbers and the
+derivation live in `hw-gb10`.
 
 ## On AMD (CDNA / RDNA4)
 

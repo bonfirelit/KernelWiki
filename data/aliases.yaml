@@ -142,6 +142,16 @@ sm103:
   - GB300
   - "SM103"
 
+sm120:
+  - "RTX 5090"
+  - "RTX 50 series"
+  - "SM120"
+
+sm121:
+  - GB10
+  - "DGX Spark"
+  - "SM121"
+
 sm90:
   - Hopper
   - hopper

@@ -39,6 +39,7 @@ See [references/examples.md](references/examples.md) for 10 worked query pattern
 - [hw-2sm-cooperative](wiki/hardware/2sm-cooperative.md) — Two-SM cooperative MMA
 - [hw-nvfp4](wiki/hardware/nvfp4.md) — NVFP4 and block-scaled narrow precision
 - [hw-pdl-gdc](wiki/hardware/pdl-gdc.md) — Programmatic Dependent Launch / Grid Dependency Control
+- [hw-gb10](wiki/hardware/gb10.md) — GB10 / sm_121 (DGX Spark) as a kernel target
 
 ### Optimization Techniques
 

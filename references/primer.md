@@ -25,6 +25,7 @@ All page IDs below resolve via `get_page.py <id>`. All paths are relative to the
 | NVFP4 / block-scaled FP | `hw-nvfp4` | `wiki/hardware/nvfp4.md` | E2M1 data + per-16 FP8 scale; task prose says E4M3FNUZ, current reference code uses `torch.float8_e4m3fn`. PTX `UE4M3` is a distinct 7-bit unsigned encoding; MXFP4's `UE8M0` is a distinct block-32 format. |
 | PDL / GDC | `hw-pdl-gdc` | `wiki/hardware/pdl-gdc.md` | Programmatic Dependent Launch and Grid Dependency Control — overlap successive kernel launches. |
 | mbarrier primitives | `hw-mbarrier` | `wiki/hardware/mbarrier.md` | Shared-memory barriers with phase tracking; the glue between TMA/tcgen05/warps. |
+| GB10 / sm_121 target | `hw-gb10` | `wiki/hardware/gb10.md` | DGX Spark superchip (48 SMs, unified LPDDR5x). No tcgen05/TMEM/wgmma; warp-level `mma.sync` only; FP4/FP6 MMA requires the `sm_121a` target. |
 
 ---
 
@@ -181,6 +182,8 @@ When the user types one of these, match to the canonical term shown:
 | Blackwell | `blackwell` family |
 | B200, GB200, SM100 | `sm100` |
 | B300, GB300, SM103 | `sm103` |
+| RTX 5090, RTX 50 series, SM120 | `sm120` |
+| GB10, DGX Spark, SM121 | `sm121` |
 | Hopper, H100, H200, H800, SM90 | `sm90` |
 | MoE, mixture of experts, expert parallelism | `moe` |
 | MLA, multi-head latent attention | `mla` |
